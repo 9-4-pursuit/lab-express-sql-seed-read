@@ -1,7 +1,7 @@
 
 const express = require("express");
 const song = express.Router();
-const { getAllSongs, getASong } = require("../queries/Songs");
+const { getAllSongs, getASong } = require("../queries/songs");
 
 // GET ALL
 song.get("/", async (req, res) => {
