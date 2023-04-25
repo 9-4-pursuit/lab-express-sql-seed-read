@@ -1,6 +1,6 @@
 const express = require("express");
 const songs = express.Router();
-const {getAllSongs} = require("../queries/songs.js");
+const {getAllSongs, getOneSong} = require("../queries/songs.js");
 
 songs.get("/", async (req, res) => {
   const allSongs = await getAllSongs();
@@ -10,10 +10,19 @@ songs.get("/", async (req, res) => {
   } else {
     res.status(500).json({error: "Server Error"});
   }
-})
+});
 
-songs.get("/:id", (req, res) => {
-  res.status(200).send("One Song")
+songs.get("/:id", async (req, res) => {
+  const {id} = req.params;
+  const oneSong = await getOneSong(id); 
+
+  if (oneSong) {
+    res.status(200).send(oneSong);
+  } else {
+    res.status(500).json({error: "Server Error"});
+  }
+
+  
 })
 
 module.exports = songs;
