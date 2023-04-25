@@ -1,7 +1,6 @@
 const express = require("express");
 const song = express.Router();
 const { getAllSongs, getASong } = require("../queries/songs");
-// const bookmarkArray = require("../Models/song.js");
 
 song.get("/", async (req, res) => {
   const allSongs = await getAllSongs();
