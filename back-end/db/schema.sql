@@ -1,11 +1,11 @@
 -- If our db already exists, drop it
-DROP DATABASE IF EXISTS playlists_dev;
+DROP DATABASE IF EXISTS songs_dev;
 
 -- CREATE DATABASE 
-CREATE DATABASE playlists_dev;
+CREATE DATABASE songs_dev;
 
 -- Connect to db
-\c playlists_dev;
+\c songs_dev;
 
 -- create a table for our songs
 CREATE TABLE songs (
