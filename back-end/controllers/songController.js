@@ -1,6 +1,6 @@
 const express = require("express");
 const songs = express.Router();
-const {getAllSongs, getOneSong, createSong, deleteSong} = require("../queries/songs.js");
+const {getAllSongs, getOneSong, createSong, deleteSong, updateSong} = require("../queries/songs.js");
 
 songs.get("/", async (req, res) => {
   const allSongs = await getAllSongs();
@@ -29,13 +29,14 @@ songs.post("/", async (req, res) => {
   
 
   try {
-    if (!newSong.name || !newSong.artist || typeof newSong.is_favorite !== "boolean") {
-        res.status(400).json({error: error});
-    }
+    // if (!newSong.name || !newSong.artist || typeof newSong.is_favorite !== "boolean") {
+    //     res.status(400).json({error: "Invalid Request"});
+    // } else {
+      const addedSong = await createSong(newSong);
 
-    const addedSong = await createSong(newSong);
+      res.status(200).json(addedSong);
+    //}
 
-    res.status(200).json(addedSong);
   } catch (error) {
     res.status(400).json({error: error});
   }
@@ -51,6 +52,19 @@ songs.delete("/:id", async(req, res) => {
   } catch (error) {
     res.status(400).json({error: error});
   }
+});
+
+songs.put("/:id", async (req, res) => {
+  const {id} = req.params;
+  const songUpdates = req.body;
+
+  try {
+    const updatedSong = await updateSong(id, songUpdates);
+    res.status(200).json(updatedSong);
+  } catch (error) {
+    res.status(400).json({error: error});
+  }
+
 });
 
 module.exports = songs;
