@@ -29,14 +29,9 @@ songs.post("/", async (req, res) => {
   
 
   try {
-    // if (!newSong.name || !newSong.artist || typeof newSong.is_favorite !== "boolean") {
-    //     res.status(400).json({error: "Invalid Request"});
-    // } else {
       const addedSong = await createSong(newSong);
 
       res.status(200).json(addedSong);
-    //}
-
   } catch (error) {
     res.status(400).json({error: error});
   }
