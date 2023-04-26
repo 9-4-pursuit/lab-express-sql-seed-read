@@ -10,7 +10,7 @@ song.get("/", async (req, res) => {
     if (allSongs) {
         res.status(202).json(allSongs);
     } else {
-        res.status(500).json({ error: "Server Error" });
+        res.status(500).json({ error: "Server Error Get" });
     }
 });
 
@@ -22,7 +22,7 @@ song.get("/:id", async (req, res) => {
     if (song) {
         res.status(202).json(song);
     } else {
-        res.status(500).json({ error: "Server Error" });
+        res.status(500).json({ error: "Server Error Show" });
     }
 });
 
