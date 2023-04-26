@@ -8,7 +8,7 @@ song.get("/", async (req, res) => {
     const allSongs = await getAllSongs();
 
     if (allSongs) {
-        res.status(202).json(allSongs);
+        res.status(200).json(allSongs);
     } else {
         res.status(500).json({ error: "Server Error Get" });
     }
@@ -20,7 +20,7 @@ song.get("/:id", async (req, res) => {
     const song = await getASong(id);
 
     if (song) {
-        res.status(202).json(song);
+        res.status(200).json(song);
     } else {
         res.status(500).json({ error: "Server Error Show" });
     }
@@ -32,7 +32,7 @@ song.post("/", async (req, res) => {
 
     try {
         const addedSong = await createSong(newSong);
-        res.status(202).json(addedSong);
+        res.status(200).json(addedSong);
     } catch (error) {
         res.status(400).json({ error: error })
     }
