@@ -26,10 +26,16 @@ songs.get("/:id", async (req, res) => {
 songs.post("/", async (req, res) => {
   const newSong = req.body;
 
+  
+
   try {
+    if (!newSong.name || !newSong.artist || typeof newSong.is_favorite !== "boolean") {
+        res.status(400).json({error: error});
+    }
+
     const addedSong = await createSong(newSong);
 
-    res.status(202).json(addedSong);
+    res.status(200).json(addedSong);
   } catch (error) {
     res.status(400).json({error: error});
   }
@@ -41,7 +47,7 @@ songs.delete("/:id", async(req, res) => {
   try {
     const deletedSong = await deleteSong(id);
 
-    res.status(202).json(deletedSong);
+    res.status(200).json(deletedSong);
   } catch (error) {
     res.status(400).json({error: error});
   }
