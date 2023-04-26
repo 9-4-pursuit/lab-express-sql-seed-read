@@ -1,11 +1,10 @@
 const express = require("express");
-const song = express.Router();
-const { getAllSongs, getASong } = require("../queries/songs");
+const songs = express.Router();
+const { getAllSongs, getASong, createSong, deleteSong, updateSong } = require("../queries/songs");
 
 //GET ROUTE
-song.get("/", async (req, res) => {
+songs.get("/", async (req, res) => {
   const allSongs = await getAllSongs();
-  // BEFORE SQL INJECTION --> res.status(202).send('Index Route');
 
   if (allSongs) {
     res.status(200).json(allSongs);
@@ -15,32 +14,39 @@ song.get("/", async (req, res) => {
 });
 
 //GET ONE ROUTE
-song.get("/:id", async (req, res) => {
+songs.get("/:id", async (req, res) => {
   const { id } = req.params;
-  const song = await getASong(id);
+  const songs = await getASong(id);
 
-  if (song) {
-    res.status(200).json(song);
+  if (songs) {
+    res.status(200).json(songs);
   } else {
     res.status(500).json({ error: "Server Error" });
   }
 });
 
 //CREATE ROUTE
-song.post("/", async (req, res) => {
-  //this will require a 'body' like a template for what object or data it will return
+songs.post("/", async (req, res) => {
   const newSong = req.body;
 
-  try {
-    const addedSong = await createSong(newSong);
-    res.status(200).json(addedSong);
-  } catch (error) {
-    res.status(400).json({ error: error });
+  if (!newSong.name) {
+    res.status(400).json({ error: "Name is missing" });
+  } else if (!newSong.artist) {
+    res.status(400).json({ error: "Artist is missing" });
+  } else if (newSong.is_favorite !== undefined && typeof newSong.is_favorite !== "boolean") {
+    res.status(400).json({ error: "is_favorite must be a boolean" });
+  } else {
+    try {
+      const addedSong = await createSong(newSong);
+      res.status(200).json(addedSong);
+    } catch (error) {
+      res.status(400).json({ error: error });
+    }
   }
 });
 
 //DELETE ROUTE
-song.delete("/:id", async (req, res) => {
+songs.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -51,4 +57,17 @@ song.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = song;
+// UPDATE ROUTE
+songs.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const songToUpdate = req.body;
+
+  try {
+    const updatedSong = await updateSong(id, songToUpdate);
+    res.status(200).json(updatedSong);
+  } catch (error) {
+    res.status(400).json({ error: error });
+  }
+});
+
+module.exports = songs;

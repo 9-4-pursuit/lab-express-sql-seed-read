@@ -7,14 +7,15 @@ const songController = require('./controllers/songController.js')
 app.use(express.json());
 app.use(cors());
 
-// /song is the base url endpoint for the routes
-// middleware
-app.use("/song", songController);
 
 
 app.get("/", (_, res) => {
-  res.send("Welcome to the Songs App PART UN 🥐");
+  res.send("Welcome to Tuner");
 })
+
+// /songs is the base url endpoint for the routes
+// middleware
+app.use("/songs", songController);
 
 // 404 page
 app.get("*", (req, res) => {

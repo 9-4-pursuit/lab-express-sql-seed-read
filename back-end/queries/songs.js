@@ -11,7 +11,6 @@ const getAllSongs = async () => {
 };
 
 //GET ONE
-// and query we write will start with 'db'
 const getASong = async (id) => {
   try {
     const song = await db.one("SELECT * FROM songs WHERE id=$1", id);
@@ -41,6 +40,26 @@ const createSong = async (songToAdd) => {
   }
 };
 
+//UPDATE ONE
+const updateSong = async (id, songToUpdate) => {
+  try {
+    const updatedSong = await db.one(
+      "UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, category=$5, is_favorite=$6 WHERE id=$7 RETURNING *",
+      [
+        songToUpdate.name,
+        songToUpdate.artist,
+        songToUpdate.album,
+        songToUpdate.time,
+        songToUpdate.category,
+        songToUpdate.is_favorite,
+        id
+      ]
+    );
+    return updatedSong;
+  } catch (error) {
+    return error;
+  }
+};
 
 //DELETE ONE
 const deleteSong = async (id) => {
@@ -55,11 +74,10 @@ const deleteSong = async (id) => {
   }
 };
 
-
-
 module.exports = {
   getAllSongs,
   getASong,
   createSong,
+  updateSong,
   deleteSong,
 };
