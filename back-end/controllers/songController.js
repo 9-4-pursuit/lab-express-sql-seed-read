@@ -1,6 +1,6 @@
 const express = require('express')
 const song = express.Router()
-const { getAllSongs, getOneSong, createSong, deleteSong } = require('../queries/songs.js')
+const { getAllSongs, getOneSong, createSong, deleteSong, updateSong } = require('../queries/songs.js')
 
 song.get('/', async (req, res) => {
     const allSongs = await getAllSongs();
@@ -25,8 +25,11 @@ song.delete('/:id', async (req, res) => {
     deletedSong ? res.status(200).json(deletedSong) : res.status(500).json({ error: 'server error' })
 });
 
-song.put('/:id', async(req, res)=>{
-    const {id} = req.params
+song.put('/:id', async (req, res) => {
+    const { id } = req.params
+    const { body } = req
+    const updatedSong = await updateSong(id, body)
+    updatedSong ? res.status(200).json(updatedSong) : res.status(500).json({ error: 'server error' })
 });
 
 module.exports = song;
