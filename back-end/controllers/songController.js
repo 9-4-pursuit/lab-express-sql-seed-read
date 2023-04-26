@@ -53,14 +53,19 @@ songs.delete("/:id", async (req, res) => {
     const deletedSong = await deleteSong(id);
     res.status(200).json(deletedSong);
   } catch (error) {
-    res.status(400).json({ error: error });
+    res.status(400).json({ error: error.message });
   }
 });
 
-// UPDATE ROUTE
+//UPDATE ROUTE
 songs.put("/:id", async (req, res) => {
   const { id } = req.params;
   const songToUpdate = req.body;
+
+  if (!songToUpdate.name && !songToUpdate.artist && songToUpdate.is_favorite === undefined) {
+    res.status(400).json({ error: "At least one field is required to update a song" });
+    return;
+  }
 
   try {
     const updatedSong = await updateSong(id, songToUpdate);

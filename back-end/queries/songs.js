@@ -16,9 +16,10 @@ const getASong = async (id) => {
     const song = await db.one("SELECT * FROM songs WHERE id=$1", id);
     return song;
   } catch (error) {
-    return error;
+    return error.message ? { error: error.message } : { error: error };
   }
 };
+
 
 //CREATE ONE
 const createSong = async (songToAdd) => {
