@@ -25,4 +25,8 @@ song.delete('/:id', async (req, res) => {
     deletedSong ? res.status(200).json(deletedSong) : res.status(500).json({ error: 'server error' })
 });
 
+song.put('/:id', async(req, res)=>{
+    const {id} = req.params
+});
+
 module.exports = song;
