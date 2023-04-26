@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use('/song', songController);
+app.use('/songs', songController);
 
 // Default endpoint
 app.get('/', (req, res) => {

@@ -1,6 +1,6 @@
 \c tuner;
 
-INSERT INTO music (name, artist, album, time, is_favorite)
+INSERT INTO songs (name, artist, album, time, is_favorite)
 VALUES
 ('Fame', 'David Bowie', 'Young Americans', '4:12', true ),
     ('Once in a Lifetime', 'Talking Heads', 'Remain in Light', '4:19', true ),
