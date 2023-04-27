@@ -5,12 +5,14 @@ const { checkRequest, checkID } = require("../validations/checkSubmit.js");
 
 //INDEX
 songs.get('/', async (req, res) => {
-    const allSongs = await getAllSongs();
+    const allSongs = await getAllSongs(req.query.order, req.query.is_favorite);
     if (allSongs) {
+        //songs?order=asc/desc; is_favorite=true/false;
+        console.log("order", req.query.order, "is_favorite", req.query.is_favorite);
         res.status(202).json(allSongs);
     } else {
         res.status(500).json({ error: 'Server Error on Get all songs' });
-    }
+    } 
 });
 
 //SHOW INDIVIDUAL RECORD

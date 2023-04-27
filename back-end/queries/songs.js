@@ -1,15 +1,35 @@
 const db = require('../db/dbConfig');
 
-const getAllSongs = async() => {
+const getAllSongs = async (AscDesc = "", IsFavorite = "") => {
+    // ORDER BY name ASC/DESC
+    // WHERE is_favorite = true/false
+
+    let basequery = `SELECT * FROM songs`;
+
+    //Note:  Order of "if" statements is important.
+
+    if (IsFavorite === "true") {
+        basequery += ` WHERE is_favorite = true`;
+    } else if (IsFavorite === "false") {
+        basequery += ` WHERE is_favorite = false`;
+    }
+
+    if (AscDesc === "asc") {
+        basequery += ` ORDER BY name ASC`;
+    } else if (AscDesc === "desc") {
+        basequery += ` ORDER BY name DESC`;
+    }
+
+    console.log(basequery);
     try {
-        const allSongs = await db.any("SELECT * FROM songs");
+        const allSongs = await db.any(basequery);
         return allSongs;
     } catch (error) {
         return error;
     }
 };
 
-const getASong = async(id) => {
+const getASong = async (id) => {
     try {
         const song = await db.one("SELECT * FROM songs WHERE id=$1", id);
         return song;
