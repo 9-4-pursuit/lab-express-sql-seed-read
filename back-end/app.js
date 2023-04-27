@@ -11,7 +11,7 @@ app.use(cors())
 app.use("/songs", songsController)
 
 app.get("/", (req, res) => {
-   res.send("Welcome to the Songs App") 
+   res.send("Welcome to Tuner") 
 })
 
 app.get("*", (req, res) => {
