@@ -1,14 +1,15 @@
 -- If DB exists, drop it
-DROP DATABASE IF EXISTS songs_dev;
+DROP DATABASE IF EXISTS tuner;
 
 -- Create DB
-CREATE DATABASE songs_dev;
+CREATE DATABASE tuner;
 
 -- Connect to DB
-\c songs_dev;
+\c tuner;
 
 --Create a table for songs
 CREATE TABLE songs(
+    id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     artist TEXT NOT NULL,
     album TEXT,
