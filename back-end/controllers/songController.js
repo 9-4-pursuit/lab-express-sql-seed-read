@@ -1,6 +1,6 @@
 const express = require('express')
 const song = express.Router();
-const { getAllSongs, getOneSong, createSong } = require('../queries/songs')
+const { getAllSongs, getOneSong, createSong, deleteSong } = require('../queries/songs')
 
 // Index route
 song.get('/', async (req, res) => {
@@ -30,10 +30,22 @@ song.post('/', async (req, res) => {
     const newSong = req.body;
 
     try {
-        const addedSong = await createsong(newSong)
+        const addedSong = await createSong(newSong)
         res.status(200).json(addedSong) 
     } catch (error) {
         res.status(400).json({ error: error})
+    }
+})
+
+// Delete route
+song.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const deletedSong = await deleteSong(id);
+        res.status(200).json(deletedSong);
+    } catch (error) {
+        res.status(400).json({ error: error});
     }
 })
 
