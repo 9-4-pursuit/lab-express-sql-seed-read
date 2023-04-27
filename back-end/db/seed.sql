@@ -5,4 +5,4 @@ INSERT INTO songs (name, artist, album, time, is_favorite) VALUES
 ('The Gerbil Gummy Song', 'Gerby Gerbil', 'Gerby''s Greatest Hits Album', '2023-02-02', FALSE),
 ('The Chill Chinchilla Song', 'Chill Chinchilla', 'Chill''s Greatest Hits Album', '2023-03-03', FALSE);
 
--- open a new terminal, psql -U postgrest -f db/seed.sql
+-- open a new terminal, psql -U postgres -f db/seed.sql
