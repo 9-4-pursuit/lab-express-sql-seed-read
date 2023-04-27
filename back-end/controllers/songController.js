@@ -1,6 +1,6 @@
 const express = require('express')
 const song = express.Router();
-const { getAllSongs, getOneSong } = require('../queries/songs')
+const { getAllSongs, getOneSong, createSong } = require('../queries/songs')
 
 // Index route
 song.get('/', async (req, res) => {
@@ -22,6 +22,18 @@ song.get('/:id', async (req, res) => {
         res.status(202).json(song);
     } else {
         res.status(500).json({ error: 'Server Error' })
+    }
+})
+
+// Create route
+song.post('/', async (req, res) => {
+    const newSong = req.body;
+
+    try {
+        const addedSong = await createsong(newSong)
+        res.status(200).json(addedSong) 
+    } catch (error) {
+        res.status(400).json({ error: error})
     }
 })
 
