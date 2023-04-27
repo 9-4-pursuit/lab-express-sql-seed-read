@@ -10,6 +10,17 @@ const getAllSongs = async () => {
     }
 }
 
+// Show query
+const getOneSong = async (id) => {
+    try {
+        const song = await db.one("SELECT * FROM songs WHERE id=$1", id)
+        return song;
+    } catch (error) {
+        return error;
+    }
+}
+
 module.exports = {
-    getAllSongs
+    getAllSongs,
+    getOneSong
 }
