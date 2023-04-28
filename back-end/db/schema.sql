@@ -1,3 +1,5 @@
+-- psql -U postgres -f db/schema.sql
+
 -- IF our db already exists, drop it.
 DROP DATABASE IF EXISTS songs_dev;
 
