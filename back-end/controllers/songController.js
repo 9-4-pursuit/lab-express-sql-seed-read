@@ -5,12 +5,13 @@ const { checkId, checkRequest } = require('../validations/checkSongs.js');
 
 //index route
 songs.get('/', async (req, res) => {
-  const allSongs = await getAllSongs();
+  const songQuery = req.query;
+  const allSongs = await getAllSongs(songQuery);
 
-  if (allSongs) {
-    res.status(200).json(allSongs);
+  if (allSongs.success) {
+    res.status(200).json(allSongs.payload);
   } else {
-    res.status(500).json({ error: "Error getting the index of all the songs." });
+    res.status(500).json({ error: `Error: ${allSongs.payload}` });
   }
 })
 

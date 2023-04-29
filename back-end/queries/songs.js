@@ -1,12 +1,38 @@
 const db = require('../db/dbConfig.js');
 
 //index query
-const getAllSongs = async () => {
+const getAllSongs = async (songQuery) => {
+  let queryString = "SELECT * FROM songs";
+
+  if (Object.keys(songQuery).length) {
+    if (songQuery.order) {
+      if (songQuery.order === "asc") {
+        queryString += " ORDER BY name ASC";
+      } else if (songQuery.order === "desc") {
+        queryString += " ORDER BY name DESC";
+      } else {
+        return { success: false, payload: "Invalid 'order' value." };
+      }
+
+    } else if (songQuery.is_favorite) {
+      if (songQuery.is_favorite === "true") {
+        queryString += " WHERE is_favorite = true";
+      } else if (songQuery.is_favorite === "false") {
+        queryString += " WHERE is_favorite = false";
+      } else {
+        return { success: false, payload: "Invalid 'is_favorite' value." };
+      }
+
+    } else {
+      return { success: false, payload: "Invalid filter request." };
+    }
+  }
+
   try {
-    const allSongs = await db.any("SELECT * FROM songs;");
-    return allSongs;
+    const allSongs = await db.any(queryString + ";");
+    return { success: true, payload: allSongs };
   } catch (error) {
-    return error;
+    return { success: false, payload: error };
   }
 }
 
