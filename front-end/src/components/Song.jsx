@@ -8,7 +8,7 @@ function Song({ song }) {
       <td>
         {
           is_favorite
-          ? "⭐"
+          ? "⭐️"
           : ""
         }
       </td>

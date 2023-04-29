@@ -1,7 +1,11 @@
+import EditSong from "../components/EditSong";
 
 function Edit() {
   return (
-    <div>Edit</div>
+    <div>
+      <h1>Edit</h1>
+      <EditSong />
+    </div>
   );
 }
 
