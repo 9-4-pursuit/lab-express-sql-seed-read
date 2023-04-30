@@ -188,10 +188,11 @@ describe("Songs", () => {
       it("with correct id - fetches the correct song with the correct key/properties", async () => {
         const response = await request(songs).get("/songs/1");
         const parsedRes = JSON.parse(response.text);
-        expect(parsedRes.name).toEqual("Fame");
-        expect(parsedRes.artist).toEqual("David Bowie");
-        expect(parsedRes.album).toEqual("Young Americans");
-        expect(parsedRes.time).toEqual("4:12");
+        expect(parsedRes.name).toEqual("Bella Ciao(feat. Kabza De Small, DJ Maphorisa)");
+        expect(parsedRes.artist).toEqual("Tyler ICU");
+        expect(parsedRes.album).toEqual("Bella Ciao (feat. Kabza De Small, DJ Maphorisa) - Single");
+        expect(parsedRes.time).toEqual("5:49");
+        expect(parsedRes.category).toEqual("Amapiano");
         expect(parsedRes.is_favorite).toEqual(true);
       });
 
@@ -262,7 +263,7 @@ describe("Songs", () => {
       it("with valid id - deletes the correct song", async () => {
         const response = await request(songs).delete("/songs/1").send();
         const parsedRes = JSON.parse(response.text);
-        expect(parsedRes.name).toEqual("Fame");
+        expect(parsedRes.name).toEqual("Bella Ciao(feat. Kabza De Small, DJ Maphorisa)");
       });
       it("with invalid id - does not delete anything", async () => {
         const response = await request(songs).delete("/songs/99999").send();

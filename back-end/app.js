@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors")
 const songController = require('./controllers/songController.js')
+const { validateURL } = require('./validations/checkSongs.js')
+
 
 // MIDDLEWARE
 app.use(express.json());
