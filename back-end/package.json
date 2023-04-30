@@ -27,5 +27,6 @@
     "nodemon": "^2.0.22",
     "pg-promise": "^11.4.3",
     "supertest": "^6.2.0"
-  }
+  },
+  "keywords": []
 }
