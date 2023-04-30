@@ -1,7 +1,7 @@
 const express = require("express");
 const songs = express.Router();
 const {getAllSongs, getOneSong, createSong, deleteSong, updateSong} = require("../queries/songs.js");
-const {validateRequests} = require("../validations/checkSongs.js");
+const {validateRequests, validateId} = require("../validations/checkSongs.js");
 
 songs.get("/", async (req, res) => {
   const allSongs = await getAllSongs();
@@ -13,7 +13,7 @@ songs.get("/", async (req, res) => {
   }
 });
 
-songs.get("/:id", async (req, res) => {
+songs.get("/:id", validateId, async (req, res) => {
   const {id} = req.params;
   const oneSong = await getOneSong(id); 
 
@@ -27,8 +27,6 @@ songs.get("/:id", async (req, res) => {
 songs.post("/", validateRequests, async (req, res) => {
   const newSong = req.body;
 
-  
-
   try {
       const addedSong = await createSong(newSong);
 
@@ -38,7 +36,7 @@ songs.post("/", validateRequests, async (req, res) => {
   }
 });
 
-songs.delete("/:id", async(req, res) => {
+songs.delete("/:id", validateId, async(req, res) => {
   const {id} = req.params;
 
   try {
