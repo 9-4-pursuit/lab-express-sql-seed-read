@@ -7,7 +7,7 @@ const { getAllSongs, getSong, createSong, deleteSong, updateSong } = require('..
 songs.get('/', async (req, res) => {
     const allSongs = await getAllSongs();
 
-    if (allSongs) {
+    if (allSongs[0]) {
         res.status(202).json(allSongs);
     } else {
         res.status(500).json({error: 'Server Error'})
