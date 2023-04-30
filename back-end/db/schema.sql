@@ -10,9 +10,9 @@ CREATE DATABASE songs_dev;
 -- create a table for our songs
 CREATE TABLE songs (
     id SERIAL PRIMARY KEY,
-    name string REQUIRED,
-    artist string REQUIRED,
-    album string,
-    time string,
-    is_favorite BOOLEAN
+    name TEXT NOT NULL,
+    artist TEXT NOT NULL,
+    album TEXT,
+    time TEXT,
+    is_favorite BOOLEAN 
 );
