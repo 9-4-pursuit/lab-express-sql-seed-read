@@ -1,11 +1,11 @@
 // using package installed npm install pg-promise
-// invoke pg-pomise
+// invoke pg-promise directly
 const pgp = require('pg-promise')();
 
 // tell it what db we are connecting to
 require('dotenv').config();
 
-// make a conection object
+// make a connection object
 // const { PG_HOST, PG_PORT, PG_DATABASE, PG_USER } = process.env
 
 const cn = {
