@@ -36,9 +36,14 @@ const createSong = async (songToAdd) => {
 //delete query
 
 const deleteSong = async (id) =>{
+    
   try {
+    const songExists = await db.oneOrNone("SELECT id FROM songs WHERE id=$1", id)
+    if (!songExists) {
+        return { error: `Song with ID ${id} does not exists in db` }
+    }
       const deletedSong = await db.one("DELETE FROM songs WHERE id=$1 RETURNING *;", id)
-      return deletedSong
+      return deletedSong;
   }catch (error) {
       return error
   }
