@@ -1,5 +1,8 @@
+import SongEdit from "../Components/SongEdit.js";
+
 export default function Edit () {
   return (<div className="Edit">
-    Edit
+    <h2>Edit</h2>
+    <SongEdit/>
   </div>);
 }
