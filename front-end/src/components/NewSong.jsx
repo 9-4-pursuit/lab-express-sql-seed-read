@@ -13,8 +13,8 @@ function NewSong() {
   });
   const navigate = useNavigate();
 
-  function addSong() {
-    axios
+  async function addSong() {
+    await axios
       .post(`${API}/songs`, newSong)
       .then(() => navigate("/songs"))
       .catch((error) => console.warn("Error: POST", error))

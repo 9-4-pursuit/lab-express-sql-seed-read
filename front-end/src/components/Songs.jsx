@@ -5,16 +5,43 @@ const API = process.env.REACT_APP_API_URL;
 
 function Songs() {
   const [allSongs, setAllSongs] = useState([]);
+  const [filterOption, setFilterOption] = useState("");
 
   useEffect(() => {
-    axios
-      .get(`${API}/songs`)
-      .then(response => setAllSongs(response.data))
-      .catch(error => console.error("Error: GET", error))
-  }, []);
+    if (!filterOption.length) {
+      async function getAll() {
+        await axios
+          .get(`${API}/songs`)
+          .then(response => setAllSongs(response.data))
+          .catch(error => console.error("Error: GET", error))
+      }
+      getAll();
+    } else {
+      async function getByFilter() {
+        await axios
+          .get(`${API}/songs?${filterOption}`)
+          .then(response => setAllSongs(response.data))
+          .catch(error => console.error("Error: GET", error))
+      }
+      getByFilter();
+    }
+  }, [filterOption]);
+
+  function handleOptionChange(event) {
+    setFilterOption(event.target.value);
+  };
 
   return (
     <div className="Song">
+      <label htmlFor="filterOption">Filter: </label>
+      <select id="filterOption" value={filterOption.type} onChange={handleOptionChange}>
+        <option value="" defaultValue>All</option>
+        <option value="order=asc">Ascending order</option>
+        <option value="order=desc">Descending order</option>
+        <option value="is_favorite=true">Favorite</option>
+        <option value="is_favorite=false">Non-Favorite</option>
+      </select>
+
       <section>
         <table>
           <thead>

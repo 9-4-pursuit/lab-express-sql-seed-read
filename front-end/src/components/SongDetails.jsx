@@ -10,15 +10,18 @@ function SongDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`${API}/songs/${id}`)
-      .then(response => setTheSong(response.data))
-      .catch(error => console.error("Error: GET", error))
+    async function getById() {
+      await axios
+        .get(`${API}/songs/${id}`)
+        .then(response => setTheSong(response.data))
+        .catch(error => console.error("Error: GET", error))
+    }
+    getById();
   }, [id]);
 
-  function handleDelete() {
+  async function handleDelete() {
     if (window.confirm("Are you sure you want to delete this song?")) {
-      axios
+      await axios
         .delete(`${API}/songs/${id}`)
         .then(() => navigate('/songs'))
         .catch(error => console.error("Error: DELETE", error))

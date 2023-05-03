@@ -13,16 +13,19 @@ function EditSong() {
   });
   const { id } = useParams();
   const navigate = useNavigate();
-console.log(id)
+
   useEffect(() => {
-    axios
-      .get(`${API}/songs/${id}`)
-      .then((response) => setEditSong(response.data))
-      .catch((error) => console.error("Error: GET", error))
+    async function getById() {
+      await axios
+        .get(`${API}/songs/${id}`)
+        .then((response) => setEditSong(response.data))
+        .catch((error) => console.error("Error: GET", error))
+    }
+    getById();
   }, [id]);
 
-  function updateTxn() {
-    axios
+  async function updateTxn() {
+    await axios
       .put(`${API}/songs/${id}`, editSong)
       .then((response) => {
         setEditSong(response.data);
