@@ -9,7 +9,7 @@ app.use(cors());
 app.use("/songs", songController);
 
 app.get("/", (req, res) => {
-    res.send("Welcome to the Tuner App!");
+    res.send("Welcome to Tuner");
 })
 
 app.get("*", (req, res) => {

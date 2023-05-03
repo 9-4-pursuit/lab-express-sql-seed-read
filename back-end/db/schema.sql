@@ -1,11 +1,11 @@
 -- IF our db already exists, drop it
-DROP DATABASE IF EXISTS songs_dev;
+DROP DATABASE IF EXISTS tuner;
 
 -- Create database
-CREATE DATABASE songs_dev;
+CREATE DATABASE tuner;
 
 -- Connect to the db
-\c songs_dev;
+\c tuner;
 
 -- Create a table for our songs
 CREATE TABLE songs (

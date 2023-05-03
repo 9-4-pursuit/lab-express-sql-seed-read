@@ -1,4 +1,4 @@
-\c songs_dev;
+\c tuner;
 
 INSERT INTO songs (name, artist, album, time, is_favorite) VALUES
 ('It Was A Good Day', 'Ice Cube', 'The Predator', '4:20', true),

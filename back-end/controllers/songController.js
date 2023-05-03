@@ -1,20 +1,21 @@
 const express = require('express')
-const song = express.Router();
+const songs = express.Router();
 const { getAllSongs, getOneSong, createSong, deleteSong, updateSong } = require('../queries/songs')
+const { checkRequest } = require('../validations/checkSongs')
 
 // Index route
-song.get('/', async (req, res) => {
+songs.get('/', async (req, res) => {
     const allSongs = await getAllSongs();
 
     if (allSongs) {
-        res.status(202).json(allSongs);
+        res.status(200).json(allSongs);
     } else {
         res.status(500).json({ error: 'Server Error' })
     }
 })
 
 // Show route
-song.get('/:id', async (req, res) => {
+songs.get('/:id', async (req, res) => {
     const { id } = req.params;
     const song = await getOneSong(id);
 
@@ -26,7 +27,7 @@ song.get('/:id', async (req, res) => {
 })
 
 // Create route
-song.post('/', async (req, res) => {
+songs.post('/', checkRequest, async (req, res) => {
     const newSong = req.body;
 
     try {
@@ -38,7 +39,7 @@ song.post('/', async (req, res) => {
 })
 
 // Delete route
-song.delete('/:id', async (req, res) => {
+songs.delete('/:id', async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -50,7 +51,7 @@ song.delete('/:id', async (req, res) => {
 })
 
 // Update route
-song.put('/:id', async (req, res) => {
+songs.put('/:id', async (req, res) => {
     const { id } = req.params;
     const { body } = req;
     
@@ -62,4 +63,4 @@ song.put('/:id', async (req, res) => {
     }
 })
 
-module.exports = song;
+module.exports = songs;
