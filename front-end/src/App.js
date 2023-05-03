@@ -10,7 +10,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/songs" element={<Songs />} />
-        <Route path="/songs/:index" element={<SongDetails />} />
+        <Route path="/songs/:id" element={<SongDetails />} />
         <Route path="/songs/new" element={<SongForm />} />
       </Routes>
       <h1>Tuner App</h1>
