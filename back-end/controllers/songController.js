@@ -1,7 +1,20 @@
 
 const express = require("express");
 const song = express.Router();
-const { getAllSongs, getASong, createSong, deleteSong } = require("../queries/songs");
+const {
+    getAllSongs,
+    getASong,
+    createSong,
+    deleteSong,
+    updateSong
+} = require("../queries/songs");
+const {
+    checkRequest,
+    checkId,
+    validateUrl,
+    checkBoolean,
+    checkName
+} = require("../validations/checkSongs");
 
 // GET ALL
 song.get("/", async (req, res) => {
@@ -15,19 +28,19 @@ song.get("/", async (req, res) => {
 });
 
 // SHOW ONE
-song.get("/:id", async (req, res) => {
+song.get("/:id", checkId, async (req, res) => {
     const { id } = req.params;
     const song = await getASong(id);
 
-    if (song) {
+    if (song.id) {
         res.status(200).json(song);
     } else {
-        res.status(500).json({ error: "Server Error Show" });
+        res.status(404).json({ error: "ID Incorrect" });
     }
 });
 
 // CREATE ROUTE
-song.post("/", async (req, res) => {
+song.post("/", checkRequest, async (req, res) => {
     const newSong = req.body;
 
     try {
@@ -39,15 +52,32 @@ song.post("/", async (req, res) => {
 });
 
 // DELETE ROUTE
-song.delete("/:id", async (req, res) => {
+song.delete("/:id", checkId, async (req, res) => {
     const { id } = req.params;
 
     try {
         const deletedSong = await deleteSong(id);
-        res.status(200).json(deletedSong);
+        if (deletedSong.id) {
+            res.status(200).json(deletedSong);
+        } else {
+            throw new Error("No song with that ID found")
+        }
     } catch (error) {
-        res.status(400).json({ error: error })
+        res.status(404).json({ error: error })
     }
+});
+
+// UPDATE ROUTE
+song.put("/:id", async (req, res) => {
+    const { id } = req.params;
+    const { body } = req;
+
+    try {
+        const updatedSong = await updateSong(id, body);
+        res.status(200).json(updatedSong);
+    } catch (error) {
+        res.status(400).json({ error: error });
+    };
 });
 
 
