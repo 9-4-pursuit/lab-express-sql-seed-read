@@ -2,13 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import NavBar from "./Components/NavBar";
 import Songs from './Components/Songs';
+import SongDetails from './Components/SongDetails'
+import NewSongForm from './Components/NewSongForm'
+import EditSongForm from './Components/EditSongForm'
 
 function App() {
-
-  // Include /songs route (Index)
-  // /songs/:id route (Show)
-  // /songs/new (New)
-  // /songs/:id/edit
 
   return (
     <div className="App">
@@ -19,6 +17,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/songs" element={<Songs />} />
             <Route path="/songs/:id" element={<SongDetails />} />
+            <Route path="/songs/new" element={<NewSongForm />} />
+            <Route path="/songs/:id/edit" element={<EditSongForm />} />
           </Routes>
         </main>
       </Router>
