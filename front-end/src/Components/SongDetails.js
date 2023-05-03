@@ -14,9 +14,27 @@ export default function SongDetails () {
     .catch((e) => console.warn("catch", e))
   }, [id]);
 
+  const toggleFavorite = () => {
+    const updatedSong = {...song, is_favorite: !song.is_favorite};
+
+    axios.put(`${API}/songs/${id}`, updatedSong)
+    .then(() => {
+      setSong(updatedSong)
+    },
+    (err) => console.error(err)
+    )
+    .catch((e) => console.warn("catch", e));
+  }
+
+  const handleUpdateFavorite = () => {
+    toggleFavorite();
+  }
+
   return (<div className="SongDetails">
     <h3>
-      <span className="favorite"> &nbsp; {song.is_favorite ? "⭐️" : "❌"} &nbsp; </span>
+      <span 
+        className="favorite"
+        onClick={handleUpdateFavorite}> &nbsp; {song.is_favorite ? "⭐️" : "❌"} &nbsp; </span>
       {song.name} - By {song.artist}
     </h3>
     <h4 className="album">{song.album}</h4>
