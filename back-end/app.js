@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
   });
 
   app.get('*', (req,res) => {
-    res.status(404).send("Does not work right now :(");
+    res.status(404).send("Page not Found!");
   });
 
 module.exports = app;

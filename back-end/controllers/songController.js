@@ -1,72 +1,65 @@
-const express = require('express');
+const express = require("express");
 const songs = express.Router();
-const { getAllSongs, getASong, createSong, deleteSong, updateSong } = require('../queries/songs')
+const {
+  getAllSongs,
+  getASong,
+  createSong,
+  deleteSong,
+  updateSong,
+} = require("../queries/songs.js");
 
-// index route
-
-songs.get('/', async (req,res) => {
-     const allSongs = await getAllSongs();
-
-     if (allSongs) {
-        res.status(200).json(allSongs);
-     } else {
-        res.status(500).json({ error: 'Server Error' })
-     }
+// index page - all songs
+songs.get("/", async (req, res) => {
+  //http://localhost:3003/songs
+  const allSongs = await getAllSongs();
+  if (allSongs[0]) {
+    res.status(200).json(allSongs);
+  } else {
+    res.status(500).json({ error: "server error" });
+  }
 });
 
-// show route
-
-songs.get('/:id', async (req,res) => {
-    const { id } = req.params;
-    const song = await getASong(id)
-
-    if (song) {
-        res.status(404).json(song);
-    } else {
-        res.status(500).json({ error: 'Server Error'})
-    }
+// SHOW one song
+songs.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  const song = await getASong(id);
+  if (song) {
+    res.status(200).json(song);
+  } else {
+    res.status(404).json({ error: "not found" });
+  }
 });
 
-// create route
+// CREATE
+songs.post("/", async (req, res) => {
+  try {
+    const song = await createSong(req.body);
+    res.status(200).json(song);
+  } catch (error) {
+    res.status(400).json({ error: error });
+  }
+});
 
-songs.post('/', async (req, res) => {
-    const newSong = req.body;
+//update
+songs.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const updatedSong = await updateSong(id, req.body);
+  if (updatedSong.id) {
+    res.status(200).json(updatedSong);
+  } else {
+    res.status(404).json("song not found");
+  }
+});
 
-    try {
-        const addedSong = await createSong(newSong)
-        res.status(400).json(addedSong)
-    } catch (error) {
-        res.status(400).json({ error: error})
-    }
-})
-
-// delete route 
-
-songs.delete('/:id', async (req, res) => {
-    const { id } = req.params;
-
-    try {
-        const deletedSong = await deleteSong(id);
-        res.status(404).json(deletedSong)
-    } catch (error) {
-        res.status(200).json({ error: error})
-    }
-})
-
-//update route
-
-songs.put('/:id', async (req, res) => {
-    const { id } = req.params;
-    const updatedSong = req.body;
-  
-    try {
-      const updated = await updateSong(id, updatedSong);
-      res.status(200).json(updated);
-    } catch (error) {
-      res.status(200).json({ error: error });
-    }
-  });
-  
-
+// Delete
+songs.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  const deletedSong = await deleteSong(id);
+  if (deletedSong.id) {
+    res.status(200).json(deletedSong);
+  } else {
+    res.status(404).json("song not found");
+  }
+});
 
 module.exports = songs;
