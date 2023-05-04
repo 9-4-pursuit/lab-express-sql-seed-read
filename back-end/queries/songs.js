@@ -1,5 +1,4 @@
 const db = require("../db/dbConfig");
-const songs = express.Router();
 
 const getAllSongs = async () => {
   try {
