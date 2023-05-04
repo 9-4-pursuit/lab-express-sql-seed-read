@@ -19,10 +19,10 @@ export default function SongEdit () {
     .then((res) => {
       setSong(res.data)
     },
-      (err) => navigate("/not-found")
+      () => navigate("/not-found")
     )
     .catch((e) => console.warn("catch", e));
-  }, [id])
+  }, [id, navigate])
 
   const handleTextChange = (event) => {
     setSong({...song, [event.target.id]: event.target.value});
@@ -32,8 +32,14 @@ export default function SongEdit () {
     setSong({...song, is_favorite: !song.is_favorite});
   }
 
-  const editSong = () => {
-
+  const editSong = (updatedSong) => {
+    axios.put(`${API}/songs/${id}`, updatedSong)
+    .then((res) => {
+      navigate(`/songs/${id}`)
+    },
+      (err) => console.error(err)
+    )
+    .catch((e) => console.warn("catch", e))
   }
 
   const handleSubmit = (event) => {
@@ -88,7 +94,7 @@ export default function SongEdit () {
       onChange={handleCheckboxChange}/>    
 
     <input type="submit"/>  
-
+    <Link to={`/songs/${id}`}><button>Cancel</button></Link>
     </form>
   </div>);
 }
