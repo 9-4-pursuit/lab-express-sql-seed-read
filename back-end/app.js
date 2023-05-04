@@ -2,6 +2,7 @@
 
 const express = require("express");
 const cors = require("cors");
+const songsController = require("./controllers/songController");
 
 //config
 const app = express();
@@ -9,6 +10,7 @@ const app = express();
 //MIDDLEWARE
 app.use(cors());
 app.use(express.json());
+app.use("/songs", songsController);
 
 //routes
 
