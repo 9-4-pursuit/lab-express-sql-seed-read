@@ -30,6 +30,21 @@ export default function SongDetails () {
     toggleFavorite();
   }
 
+  const deleteSong = () => {
+    axios.delete(`${API}/songs/${id}`)
+    .then((res) => {
+      console.log(res);
+      navigate("/songs");
+    },
+    (err) => console.error(err)
+    )
+    .catch((e) => console.warn("catch", e));
+  }
+
+  const handleDelete = () => {
+    deleteSong();
+  }
+
   return (<div className="SongDetails">
     <h3>
       <span 
@@ -39,5 +54,13 @@ export default function SongDetails () {
     </h3>
     <h4 className="album">{song.album}</h4>
     <h5 className="duration">Duration: {song.time}</h5>
+
+    <aside className="buttons">
+      <Link to="/songs"><button>Back</button></Link>
+
+      <Link to={`/songs/${id}/edit`}><button>Edit</button></Link>
+
+      <button onClick={handleDelete}>Delete</button>
+    </aside>
   </div>);
 }

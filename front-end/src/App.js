@@ -26,8 +26,6 @@ function App() {
             
           </Routes>
         </main>
-        
-        <h1>Tuner App</h1>
       </BrowserRouter>
     </div>
   );
