@@ -1,0 +1,44 @@
+nav {
+    background-color: yellowgreen;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 20px;
+}
+.Links {
+    text-decoration: none;
+    color: orange;
+}
+
+nav h1 span {
+    color: orangered;
+    font-size: xx-large;
+    text-decoration: none;
+    /* border: 3px solid gray; */
+    /* border-radius: 5px; */
+    
+
+}
+
+button.Nav-button {
+    background-color: orangered;
+    border-radius: 10px;
+    font-size: larger;
+    text-decoration: none;
+
+  
+}
+button.Nav-button:hover {
+    background-color: lightcoral;
+}
+
+button.FourOFour {
+    background-color: orangered;
+    border-radius: 10px;
+    font-size: large;
+    text-decoration: none;
+    color: aqua;
+}
+

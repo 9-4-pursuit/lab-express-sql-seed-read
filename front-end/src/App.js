@@ -1,21 +1,36 @@
-const express = require("express");
-const app = express();
-const cors = require("cors")
-const songController = require("./controllers/songController.js")
+import React from 'react'
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 
-app.use(express.json());
-app.use(cors())
+//Component
+import NavBar from './Components/NavBar'
 
-app.use("/song", songController)
+//Pages
+import Home from "./Pages/Home"
+import Show from "./Pages/Show"
+import Index from './Pages/Index'
+import New from './Pages/New'
+import Edit from "./Pages/Edit"
+import FourOFour from "./Pages/FourOFour"
 
-app.get("/", (req, res) => {
-    res.send("Welcome to Tuner");
-  })
 
 
-  //404 page
-  app.get("*", (req, res) => {
-    res.status(404).json({ error: "Page not found" });
-  })
+export default function App() {
+  return (
+    <div className='App-Front'>
+      <Router>
+        <NavBar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/songs" element={<Index />} />
+            <Route path="/songs/new" element={<New />} />
+            <Route path="/songs/:id" element={<Show />} />
+            <Route path="/songs/:id/edit" element={<Edit />} />
+            <Route path="*" element={<FourOFour />} />
+          </Routes>
+        </main>
 
-  module.exports = app;
+      </Router>
+    </div>
+  )
+}
