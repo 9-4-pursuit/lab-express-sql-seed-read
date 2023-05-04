@@ -45,7 +45,7 @@ export default function SongDetails () {
     deleteSong();
   }
 
-  return (<div className="SongDetails">
+  return (<div className="Song-Details">
     <h3>
       <span 
         className="favorite"

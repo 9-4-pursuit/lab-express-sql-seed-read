@@ -76,7 +76,7 @@ export default function SongEdit () {
       value={song.album ? song.album : ""}
       onChange={handleTextChange}/>
 
-    <label htmlFor="time">Duration:</label>
+    <label htmlFor="time">time:</label>
     <input 
       type="text"
       id="time"

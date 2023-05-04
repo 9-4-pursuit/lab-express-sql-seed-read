@@ -65,7 +65,7 @@ export default function SongNew () {
         value={song.album}
         onChange={handleTextChange}/>
 
-      <label htmlFor="time">Duration:</label>
+      <label htmlFor="time">Time:</label>
       <input 
         type="text"
         id="time"
