@@ -3,8 +3,8 @@ const songs = express.Router();
 
 const getAllSongs = require("../queries/songs");
 
-songs.get("/", (req, res) => {
-  const allSongs = getAllSongs;
+songs.get("/", async (req, res) => {
+  const allSongs = await getAllSongs();
   if (allSongs) {
     res.status(202).json(allSongs);
   } else {
