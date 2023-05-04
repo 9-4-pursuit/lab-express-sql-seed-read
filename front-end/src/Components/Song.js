@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Song({ song }) {
     return (
-        <tr>
+        <tr className="Song">
             <td>
                 {song.is_favorite ? (
                     <span>⭐️</span>
@@ -14,7 +14,13 @@ export default function Song({ song }) {
                 {song.name}
             </td>
             <td>
-                <Link to={`/songs/${song.id}`}>✏️</Link>
+                {song.artist}
+            </td>
+            <td>
+                {song.time}
+            </td>
+            <td>
+                <a href={`/songs/${song.id}`}>✏️</a>
             </td>
         </tr>
     );
