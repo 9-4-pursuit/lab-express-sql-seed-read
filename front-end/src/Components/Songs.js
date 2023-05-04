@@ -22,8 +22,11 @@ export default function Songs() {
                     <thead>
                         <tr>
                             <th>Favorite</th>
-                            <th>Song Title</th>
-                            <th>More Details</th>
+                            <th>Title</th>
+                            <th>Artist</th>
+                            <th>Length</th>
+                            <th>More...</th>
+
                         </tr>
                     </thead>
                     <tbody>

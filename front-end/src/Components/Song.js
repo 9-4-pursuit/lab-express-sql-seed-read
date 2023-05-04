@@ -5,7 +5,7 @@ export default function Song({ song }) {
         <tr className="Song">
             <td>
                 {song.is_favorite ? (
-                    <span>⭐️</span>
+                    <span>💟</span>
                 ) : (
                     <span>&nbsp; &nbsp; &nbsp;</span>
                 )}
@@ -20,7 +20,7 @@ export default function Song({ song }) {
                 {song.time}
             </td>
             <td>
-                <a href={`/songs/${song.id}`}>✏️</a>
+                <a href={`/songs/${song.id}`}>🎵</a>
             </td>
         </tr>
     );
