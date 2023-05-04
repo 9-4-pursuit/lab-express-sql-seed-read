@@ -5,7 +5,7 @@ const app = express();
 const cors = require("cors");
 const songController = require("./controllers/songController");
 
-//config
+//config -
 
 //MIDDLEWARE
 app.use(cors());
