@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
 
@@ -17,6 +17,10 @@ export default function SongNew () {
     setSong({...song, [event.target.id]: event.target.value});
   }
 
+  const handleCheckboxChange = () => {
+    setSong({...song, is_favorite: !song.is_favorite});
+  }
+
   const addSong = (newSong) => {
     axios.post(`${API}/songs`, newSong)
     .then(() => {
@@ -25,10 +29,6 @@ export default function SongNew () {
       (err) => console.error(err)
     )
     .catch((e) => console.warn("catch", e));
-  }
-
-  const handleCheckboxChange = () => {
-    setSong({...song, is_favorite: !song.is_favorite});
   }
 
   const handleSubmit = (event) => {
