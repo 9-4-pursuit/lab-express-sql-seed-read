@@ -6,6 +6,7 @@ const {
   getASong,
   newSong,
   updateSong,
+  deleteSong,
 } = require("../queries/songs");
 
 const {
@@ -24,7 +25,7 @@ songs.get("/", async (req, res) => {
   }
 });
 //index
-songs.get("/:id", async (req, res) => {
+songs.get("/:id", checkId, async (req, res) => {
   const { id } = req.params;
   const aSong = await getASong(id);
   if (aSong) {
@@ -34,7 +35,7 @@ songs.get("/:id", async (req, res) => {
   }
 });
 //create
-songs.post("/", async (req, res) => {
+songs.post("/", checkRequest, async (req, res) => {
   const lastestSong = req.body;
   const addedSong = await newSong(lastestSong);
   if (addedSong) {
@@ -51,7 +52,7 @@ songs.delete("/:id", async (req, res) => {
   if (deletedSong) {
     res.status(200).json(deletedSong);
   } else {
-    res.res(500).json({ error: error });
+    res.status(500).json({ error: error });
   }
 });
 
