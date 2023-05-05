@@ -31,7 +31,7 @@ songs.get("/:id", checkId, async (req, res) => {
   if (aSong) {
     res.status(200).json(aSong);
   } else {
-    res.status(500).json({ error: error });
+    res.status().json({ error: error });
   }
 });
 //create

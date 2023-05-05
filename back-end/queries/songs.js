@@ -52,7 +52,7 @@ const updateSong = async (id, song) => {
 const deleteSong = async (id) => {
   try {
     const deletedSong = await db.one(
-      "DELETE * FROM songs WHERE id=$1 RETURNING *",
+      "DELETE FROM songs WHERE id=$1 RETURNING *",
       id
     );
     return deletedSong;
@@ -60,4 +60,5 @@ const deleteSong = async (id) => {
     return error;
   }
 };
+
 module.exports = { getAllSongs, getASong, newSong, updateSong, deleteSong };
