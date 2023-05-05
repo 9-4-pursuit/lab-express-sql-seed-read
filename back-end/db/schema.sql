@@ -1,0 +1,14 @@
+DROP DATABASE IF EXISTS tuner WITH (FORCE);
+
+CREATE DATABASE tuner;
+
+\c tuner;
+
+CREATE TABLE IF NOT EXISTS songs (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  artist VARCHAR(255) NOT NULL,
+  album VARCHAR(255),
+  time VARCHAR(255),
+  is_favorite BOOLEAN DEFAULT false
+);
