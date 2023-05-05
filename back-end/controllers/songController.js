@@ -46,7 +46,7 @@ songs.post("/", checkRequest, async (req, res) => {
 });
 
 //delte
-songs.delete("/:id", async (req, res) => {
+songs.delete("/:id", checkId, async (req, res) => {
   const { id } = req.params;
   const deletedSong = await deleteSong(id);
   if (deletedSong) {

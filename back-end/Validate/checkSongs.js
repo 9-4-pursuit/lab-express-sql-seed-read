@@ -12,7 +12,7 @@ const checkId = (req, res, next) => {
   if (req.params.id) {
     return next();
   } else {
-    res.status(404).json({ error: "Invalid id " });
+    res.status(400).json({ error: "Invalid id " });
   }
 };
 
