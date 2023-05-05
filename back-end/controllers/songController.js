@@ -52,12 +52,13 @@ songs.delete("/:id", async (req, res) => {
 //updated
 songs.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const song = req.body;
-  const updatedSong = await updateSong(id, song);
-  if (updatedSong) {
-    res.status(200).json(updateSong);
-  } else {
-    res.status(500).json({ error: "error" });
+  const { body } = req;
+
+  try {
+    const updatedSong = await updateSong(id, body);
+    res.status(200).json(updatedSong);
+  } catch (error) {
+    res.status(500).json({ error: error });
   }
 });
 
