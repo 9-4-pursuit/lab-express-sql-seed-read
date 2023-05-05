@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import "../Css/Update.css";
+import "../CSS/Update.css"
 
 function UpdateSong() {
   const [newSong, setNewSong] = useState({

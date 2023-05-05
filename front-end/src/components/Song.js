@@ -1,17 +1,24 @@
 import { Link } from "react-router-dom";
-// import "../Css/Songs.css"
 
 function Song({ song }) {
   return (
-    <div className="song">
-      <Link to={`/songs/${song.id}`} className="song-link">
-        {song.name}
-      </Link>
-      <span className="song-artist">{song.artist}</span>
-      <span className="song-album">{song.album}</span>
-      <span className="song-time">{song.time}</span>
-      {song.is_favorite && <span className="song-favorite"></span>}
-    </div>
+    <tr>
+      <td>{song.id}</td>
+      <td>
+        <Link
+          to={`/songs/${song.id}`}
+          
+        >
+          {song.name}
+        </Link>
+      </td>
+      <td>{song.artist}</td>
+      <td>{song.album}</td>
+      <td>{song.time}</td>
+      <td>
+        {song.is_favorite ? <span> ⭐️ </span> : <span> &nbsp;&nbsp; </span>}
+      </td>
+    </tr>
   );
 }
 

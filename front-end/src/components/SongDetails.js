@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-// import "../Css/Details.css"
+import "../CSS/Details.css"
 
 function SongDetails() {
   const [showSong, setShowSong] = useState({
@@ -41,35 +41,55 @@ function SongDetails() {
   }
 
   return (
-    <div className="song-detail">
-    <div className="song-info">
+    <div
+      className="song-detail"
+      style={{ paddingBottom: "10rem" }}
+    >
       <div className="song-title">
-        <h2>{showSong.name}</h2>
-        <h3>{showSong.artist}</h3>
-        <h4>{showSong.album}</h4>
-      </div>
-      <div className="song-meta">
-        <h5>{showSong.time}</h5>
-        {showSong.is_favorite ? (
-          <h5><span role="img" aria-label="star">⭐️</span> Favorite Song</h5>
-        ) : (
-          <h5><span role="img" aria-label="cross">❌</span> Favorite Song</h5>
-        )}
-      </div>
-    </div>
+        <div className="song-info">
+          <h2>
+            <strong>Title : </strong>
+            {showSong.name}
+          </h2>
+          <h2>
+            <strong>Artist : </strong>
+            {showSong.artist}
+          </h2>
+          <h3>
+            <strong>Album : </strong>
+            {showSong.album}
+          </h3>
+          <h3>
+            <strong>Duration : </strong>
+            {showSong.time}
+          </h3>
+          {showSong.is_favorite ? (
+            <h3 className="song-meta">
+              <strong>Favorite Song : ⭐️ </strong>
+            </h3>
+          ) : (
+            <h3 className="song-meta">
+              <strong>Favorite Song : ❌ </strong>
+            </h3>
+          )}
+        </div>
 
-    <div className="song-actions">
-      <button className="button-back">
-        <Link to="/songs">Back</Link>
-      </button>
-      <button className="button-edit">
-        <Link to={`/songs/${id}/edit`}>Edit</Link>
-      </button>
-      <button className="button-delete" onClick={handleDelete}>
-        Delete
-      </button>
+        <div>
+          <div>
+            <button className="button-back">
+              <Link to="/songs">Back</Link>
+            </button>
+            <button className="button-edit">
+              <Link to={`/songs/${id}/edit`}>Edit</Link>
+            </button>
+            <button className="button-delete" onClick={handleDelete}>
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
   );
 }
-export default SongDetails;
+
+export default SongDetails

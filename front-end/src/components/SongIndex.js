@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Song from "./Song";
-// import "../Css/Index.css"
+import "../CSS/Index.css"
 
-function SongIndex() {
+function Songs() {
   const [songs, setSongs] = useState([]);
 
   useEffect(() => {
@@ -17,16 +17,16 @@ function SongIndex() {
   }, []);
 
   return (
-    <div className="SongIndex">
-    <table className="SongIndex__table">
+    <div className="Song">
+      <table className="Songs">
         <thead>
           <tr>
-          <th className="SongIndex__table-header">#</th>
-            <th className="SongIndex__table-header">Title</th>
-            <th className="SongIndex__table-header">Artist</th>
-            <th className="SongIndex__table-header">Album</th>
-            <th className="SongIndex__table-header">Duration</th>
-            <th className="SongIndex__table-header">Favorite</th>
+            <th className="Songs-header">#</th>
+            <th className="Songs-header">Title</th>
+            <th className="Songs-header">Artist</th>
+            <th className="Songs-header">Album</th>
+            <th className="Songs-header">Duration</th>
+            <th className="Songs-header">Favorite</th>
           </tr>
         </thead>
         <tbody>
@@ -41,4 +41,4 @@ function SongIndex() {
   );
 }
 
-export default SongIndex;
+export default Songs;
