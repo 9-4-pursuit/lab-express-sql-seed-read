@@ -8,6 +8,12 @@ const {
   updateSong,
 } = require("../queries/songs");
 
+const {
+  checkRequest,
+  checkId,
+  validateURL,
+} = require("../Validate/checkSongs");
+
 //show
 songs.get("/", async (req, res) => {
   const allSongs = await getAllSongs();
