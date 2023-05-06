@@ -36,8 +36,17 @@ export default function SongDetails() {
   }
 
   return (
+    <div>
+      <br></br>
+      <br></br>
+
     <article className="songDetails">
-      <h1 className="Title">{song.is_favorite ? <span>🌟</span> : null} {song.name} - By <span className="artist">{song.artist}</span></h1>
+    
+      {song.is_favorite ? 
+        (<span>🌟</span>) : 
+        (<span>&nbsp; &nbsp; &nbsp;</span>)}
+      <h1 className="Title">Song - {song.name} </h1>
+      <h1><span className="artist">Aritst - {song.artist}</span></h1>
       <h2 className="Album"> 
         <span>
           Album - {song.album}
@@ -47,6 +56,7 @@ export default function SongDetails() {
       <h3 className="Time">Time: {song.time}</h3>
 
       <div className="showNavigation">
+
         <div>
         <Link to={`/songs`}> 
           <button> Back </button>
@@ -67,6 +77,7 @@ export default function SongDetails() {
 
       </div>  
     </article>
+    </div>
   
   )
 }

@@ -18,7 +18,7 @@ export default function NewSongForm() {
     .catch((c) => console.warn("catch", c))
   }
 
-  const [song, setSongs] = useState({
+  const [song, setSong] = useState({
     name: "",
     artist: "",
     album: "",
@@ -27,11 +27,11 @@ export default function NewSongForm() {
   })
 
 const handleTextChange = (event) => {
-setSongs({...song, [event.target.id]: event.target.value})
+setSong({...song, [event.target.id]: event.target.value})
 }
 
 const handleCheckboxChange = () => {
-  setSongs({...song, is_favorite: !song.is_favorite})
+  setSong({...song, is_favorite: !song.is_favorite})
 }
 
 const handleSubmit = (event) => {
