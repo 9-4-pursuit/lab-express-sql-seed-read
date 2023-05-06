@@ -1,3 +1,32 @@
+# Instructions Issues
+
+https://github.com/9-4-pursuit/lab-express-sql-seed-read/blob/main/README-FE.md
+
+Instructions state "npm start".  In terminal, this results in
+
+/opt/homebrew/Cellar/node/18.9.0/bin/node: bad option: --openssl-legacy-provider
+
+https://github.com/9-4-pursuit/lab-express-sql-seed-read/blob/main/README-FE.md#songs
+
+Instructs to take to "songs/:id, but see below.  Also apparently
+
+"IMPORTANT
+
+Your page should" (cut off, so we don't know what the important bit was).
+
+In another section,
+
+"IMPORTANT - be sure it goes to the song's id NOT the array position." - referenced later.
+
+https://github.com/9-4-pursuit/lab-express-sql-seed-read/blob/main/README-FE.md#songsindex
+
+instructs to take to "songs/:index" (contrary to earlier instruction "songs/:id".  From description, this is, essentially, songs/:id.  As the instruction for the previous section instructs us to use the song's id, not the array position (i.e. index), I am using song id.)
+
+https://github.com/9-4-pursuit/lab-express-sql-seed-read/blob/main/README-FE.md#edit-functionality
+
+instructs to take to "songs/:id/edit"
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
