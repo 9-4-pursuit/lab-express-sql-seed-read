@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-function Song({ song }) {
-  const { id, name, artist, time, is_favorite } = song;
+function Album({ album, index }) {
+  const { id, name, artist, release_date, is_favorite } = album;
 
   return (
     <tr>
@@ -12,15 +12,15 @@ function Song({ song }) {
           : ""
         }
       </td>
+      <td>{index + 1}</td>
       <td>
-        <Link to={`/songs/${id}`}>
+        <Link to={`/albums/${id}`}>
           {name}
         </Link>
       </td>
       <td>{artist}</td>
-      <td>{time}</td>
     </tr>
   );
 }
 
-export default Song;
+export default Album;

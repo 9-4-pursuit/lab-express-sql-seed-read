@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Songs from "../components/Songs.jsx";
+import Songs from "../components/Songs/Songs.jsx";
 
 function Index() {
   return (

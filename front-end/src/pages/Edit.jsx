@@ -1,4 +1,4 @@
-import EditSong from "../components/EditSong";
+import EditSong from "../components/Songs/EditSong.jsx";
 
 function Edit() {
   return (

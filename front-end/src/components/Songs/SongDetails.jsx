@@ -5,7 +5,7 @@ const API = process.env.REACT_APP_API_URL;
 
 function SongDetails() {
   const [theSong, setTheSong] = useState([]);
-  const { name, artist, album, time, is_favorite } = theSong;
+  const { albums_id, name, artist, album, time, is_favorite } = theSong;
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ function SongDetails() {
         }
         {name} - By {artist}
       </p>
-      <p>{album}</p>
+      <p><Link to={`/albums/${albums_id}`}>{album}</Link></p>
       <p>Time: {time}</p>
 
       <button><Link to="/songs">Back</Link></button>

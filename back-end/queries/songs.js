@@ -1,11 +1,30 @@
 const db = require('../db/dbConfig.js');
 
 //index query
-const getAllSongs = async (songQuery) => {
+const getAllSongs = async (albumsId, songQuery) => {
   let queryString = "SELECT * FROM songs";
 
+  if (albumsId) {
+    queryString += " WHERE albums_id=$1";
+  }
+
   if (Object.keys(songQuery).length) {
-    if (songQuery.order) {
+    if (songQuery.is_favorite) {
+      if (albumsId) {
+        queryString += " AND";
+      } else {
+        queryString += " WHERE";
+      }
+
+      if (songQuery.is_favorite === "true") {
+        queryString += " is_favorite=true";
+      } else if (songQuery.is_favorite === "false") {
+        queryString += " is_favorite=false";
+      } else {
+        return { success: false, payload: "Invalid 'is_favorite' value." };
+      }
+
+    } else if (songQuery.order) {
       if (songQuery.order === "asc") {
         queryString += " ORDER BY name ASC";
       } else if (songQuery.order === "desc") {
@@ -14,22 +33,13 @@ const getAllSongs = async (songQuery) => {
         return { success: false, payload: "Invalid 'order' value." };
       }
 
-    } else if (songQuery.is_favorite) {
-      if (songQuery.is_favorite === "true") {
-        queryString += " WHERE is_favorite = true";
-      } else if (songQuery.is_favorite === "false") {
-        queryString += " WHERE is_favorite = false";
-      } else {
-        return { success: false, payload: "Invalid 'is_favorite' value." };
-      }
-
     } else {
       return { success: false, payload: "Invalid filter request." };
     }
   }
 
   try {
-    const allSongs = await db.any(queryString + ";");
+    const allSongs = await db.any(queryString + ";", albumsId);
     return { success: true, payload: allSongs };
   } catch (error) {
     return { success: false, payload: error };

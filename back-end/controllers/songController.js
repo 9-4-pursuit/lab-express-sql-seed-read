@@ -1,12 +1,13 @@
 const express = require('express');
-const songs = express.Router();
+const songs = express.Router({ mergeParams: true });
 const { getAllSongs, getOneSong, editSong, createSong, deleteSong } = require('../queries/songs.js');
 const { checkId, checkRequest } = require('../validations/checkSongs.js');
 
 //index route
 songs.get('/', async (req, res) => {
+  const { albumsId } = req.params;
   const songQuery = req.query;
-  const allSongs = await getAllSongs(songQuery);
+  const allSongs = await getAllSongs(albumsId, songQuery);
 
   if (allSongs.success) {
     res.status(200).json(allSongs.payload);

@@ -1,4 +1,4 @@
-import NewSong from "../components/NewSong";
+import NewSong from "../components/Songs/NewSong";
 
 function New() {
   return (
