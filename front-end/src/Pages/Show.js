@@ -1,12 +1,12 @@
-import SongEditForm from "../Components/SongEditForm";
+import SongDetails from "../Components/SongDetails";
 
-function Edit() {
+function Show() {
   return (
-    <div className="New Edit">
-      <h2>Edit</h2>
-      <SongEditForm />
+    <div className="Show">
+      <h2>Show</h2>
+      <ShowDetails />
     </div>
-  );   
+  );
 }
 
-export default Edit;
+export default Show;

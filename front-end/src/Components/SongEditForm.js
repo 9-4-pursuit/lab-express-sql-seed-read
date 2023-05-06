@@ -4,7 +4,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 
 const API = process.env.REACT_APP_API_URL;
 
-function SongEditForm() {
+export default function SongEditForm() {
     let { id } = useParams();
     let navigate = useNavigate();
 
@@ -99,5 +99,3 @@ function SongEditForm() {
         </div>
     );
 }
-
-export default SongEditForm;
