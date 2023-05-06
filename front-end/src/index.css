@@ -1,37 +1,109 @@
+body,html {
+    background-color: lightgray;
+}
+main {
+    width: 95%;
+    margin: auto;
+}
 nav {
     background-color: yellowgreen;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 1em;
     margin-bottom: 1em;
     border-radius: 20px;
+    box-shadow: 8px 8px 16px purple;
 }
 .Links {
     text-decoration: none;
-    color: orange;
+    color: maroon;
+    font-weight: bolder;
 }
+
+td{
+    text-align: center;
+}
+tbody tr:nth-child(even) {
+    background: plum;
+    
+  }
+td.artist{
+    color: purple;
+    font-weight: bold
+}
+td.album{
+    color: navy;
+    font-weight: bold;
+}
+
+td.time{
+    color: green;
+    font-weight: bold;
+}
+
+.songMap {
+    margin-left: 500px;
+}
+
 
 nav h1 span {
     color: orangered;
     font-size: xx-large;
-    text-decoration: none;
-    /* border: 3px solid gray; */
-    /* border-radius: 5px; */
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding: 10px;
     
-
+}
+nav h1 span:hover {
+    border-radius: 10px;
+    box-shadow: 8px 8px 16px purple;
+    
 }
 
-button.Nav-button {
+.showNavigation {
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+}
+.showNavigation button {
     background-color: orangered;
     border-radius: 10px;
     font-size: larger;
     text-decoration: none;
+    justify-content: space-around;
+    
+}
 
+.showNavigation button:hover {
+    background-color: lightgreen;
+    box-shadow: 8px 8px 16px purple;
+}
+div.Show {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+article.songDetails {
+    border-radius: 50px;
+    padding: 10em;
+    border: 3px solid purple;
+    box-shadow: 8px 8px 16px purple;
+    
+}
+
+
+
+button.NewSong-button {
+    background-color: orangered;
+    border-radius: 10px;
+    font-size: larger;
+    text-decoration: none;
+    float: right;
   
 }
-button.Nav-button:hover {
-    background-color: lightcoral;
+button.NewSong-button:hover {
+    background-color: lightgreen;
+    box-shadow: 8px 8px 16px purple;
 }
 
 button.FourOFour {
@@ -41,4 +113,56 @@ button.FourOFour {
     text-decoration: none;
     color: aqua;
 }
+
+button.FourOFour:hover { 
+    background-color: lightgreen;
+    box-shadow: 8px 8px 16px purple;
+}
+
+table {
+    width: 50%;
+    margin: auto;
+    border-radius: 50px;
+    padding: 2em;
+    border: 3px solid purple;
+    box-shadow: 8px 8px 16px purple;
+}
+h1.Playlist {
+    color: yellowgreen;
+    font-size: xx-large;
+
+}
+th{
+    color: yellowgreen;
+    font-size: x-large;
+    justify-content: space-evenly;
+}
+
+a.SongLinks{
+    text-decoration: none;
+    color: maroon;
+    font-weight: bolder;
+
+}
+
+a.SongLinks:hover{
+    color: red;
+    box-shadow: 8px 8px 16px red;
+}
+
+h1.Title {
+    color: maroon;
+}
+span.artist {
+    color: purple
+}
+
+h2.Album {
+    color: navy;
+}
+
+h3.Time {
+    color: green;
+}
+
 
