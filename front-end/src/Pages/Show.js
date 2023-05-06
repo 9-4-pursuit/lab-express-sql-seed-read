@@ -6,7 +6,7 @@ function Edit() {
       <h2>Edit</h2>
       <SongEditForm />
     </div>
-  );
+  );   
 }
 
 export default Edit;
