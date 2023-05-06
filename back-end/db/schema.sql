@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS songs_dev;
-CREATE DATABASE songs_dev;
-\c songs_dev;
+DROP DATABASE IF EXISTS tuner;
+CREATE DATABASE tuner;
+\c tuner;
 
 CREATE TABLE songs (
     id SERIAL PRIMARY KEY,

@@ -1,4 +1,4 @@
-\c songs_dev;
+\c tuner;
 
 INSERT INTO songs (name, artist, album, time, is_favorite) VALUES
 ('The Hamster Hammy Song', 'Hammy Hamster', 'Hammy''s Greatest Hits Album', '2023-01-01', TRUE),
