@@ -57,7 +57,7 @@ export default function SongDetails() {
           </Link>
           <button onClick={handleDelete}>DELETE</button>
         </div>
-    </div>
+      </div>
     </Container>
   </div>
   );

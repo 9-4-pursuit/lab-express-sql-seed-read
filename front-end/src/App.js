@@ -8,6 +8,8 @@ import Index from './Pages/Index';
 import Show from './Pages/Show';
 import New from './Pages/New';
 import Edit from './Pages/Edit';
+
+// COMPONENTS
 import NavBar from "./Components/NavBar";
 
 function App() {
@@ -15,7 +17,6 @@ function App() {
     <div className="App">
       <Router>
         <NavBar />
-
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
