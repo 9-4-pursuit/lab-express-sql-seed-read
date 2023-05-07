@@ -5,7 +5,7 @@ export default function Song({ song }) {
         <tr className="Song">
             <td>
                 {song.is_favorite ? (
-                    <span>💟</span>
+                    <span>⭐️</span>
                 ) : (
                     <span>&nbsp; &nbsp; &nbsp;</span>
                 )}
