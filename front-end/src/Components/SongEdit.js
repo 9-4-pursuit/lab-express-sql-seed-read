@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom";
 
 const API = process.env.REACT_APP_API_URL;
 
-export default function SongForm() {
+export default function EditSong() {
     const [song, setSong] = useState({
         name: "",
         artist: "",
@@ -13,6 +13,7 @@ export default function SongForm() {
         time: ""
     })
 
+    const { id } = useParams()
     const navigate = useNavigate()
 
     const handleTextChange = (e) => {
@@ -23,20 +24,25 @@ export default function SongForm() {
         setSong({ ...song, is_favorite: !song.is_favorite });
     };
 
-    const addSong = (newSong) => {
-        axios.post(`${API}/songs`, newSong)
-            .then(() => navigate('/songs'))
+    const updateSong = (updatedSong) => {
+        axios.put(`${API}/songs/${id}`, updatedSong)
+            .then(() => navigate(`/songs/${id}`))
             .catch((e) => console.warn(e))
     }
 
+    useEffect(() => {
+        axios.get(`${API}/songs/${id}`)
+            .then((res) => setSong(res.data))
+            .catch((e) => console.warn(e))
+    }, [id])
+
     const handleSubmit = (e) => {
-        e.preventDefault()
-        addSong(song)
+        e.preventDefault();
+        updateSong(song, id)
     }
 
     return (
-        <div className="New">
-            <h1>New</h1>
+        <div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Song Name:</label>
                 <input

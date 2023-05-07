@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-// const API = process.env.REACT_APP_API_URL;
-const API = 'http://localhost:8889'
+const API = process.env.REACT_APP_API_URL;
 
 export default function Songs() {
     const [songs, setSongs] = useState([]);
