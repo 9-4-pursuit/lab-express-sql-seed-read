@@ -1,0 +1,100 @@
+nav {
+    background-color: #ff78fb;
+  
+    background-image: url("https://thumbs.dreamstime.com/b/turntable-vinyl-record-light-blue-wooden-background-top-view-space-text-turntable-vinyl-record-light-blue-221641896.jpg");
+    background-attachment: fixed;
+    background-size: contain;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    box-shadow: 2px 2px 4px grey;
+    margin-bottom: 1em;
+  }
+  
+  main {
+    width: 90%;
+    margin: auto;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #8957ab;
+  }
+  button a {
+    color: #8957ab;
+  }
+  
+  h4 {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+  
+  table {
+    width: 50%;
+    margin: auto;
+  }
+  
+  td {
+    text-align: center;
+  }
+  
+  tbody td:not(td:first-of-type):hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  
+  tbody tr:nth-child(even) {
+    background: #f4eafd;
+  }
+  
+  .New {
+    /* border: 1px solid gold;
+    margin: auto;
+    width: 95%; */
+  }
+  
+  .New form {
+    margin: auto;
+    width: 95%;
+  }
+  
+  input[type],
+  textarea {
+    display: block;
+    width: 90%;
+    margin: auto;
+  }
+  
+  input[type="checkbox"] {
+    margin: 0;
+    width: 15%;
+  }
+  
+  input[type="submit"] {
+    width: 30%;
+  }
+  
+  .showNavigation {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+  }
+  
+  /* .Reviews {
+    background-color: whitesmoke;
+    padding: 1em;
+    box-shadow: 2px 2px 4px silver;
+  }
+  
+  .Reviews > div {
+    padding: 1em;
+    box-shadow: 0px 0px 2px silver;
+    background-color: ghostwhite;
+  }
+  .Reviews div:nth-child(odd) {
+    background-color: aliceblue;
+  }
+  
+   */
