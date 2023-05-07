@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import {Link, useParams, useNavigate} from "react-router-dom"
+
 const API = process.env.REACT_APP_API_URL
 
 export default function SongDetails() {
@@ -38,6 +39,7 @@ export default function SongDetails() {
   return (
     <div>
       <br></br>
+      <h1 className="SongDetails"> Song Details </h1>
       <br></br>
 
     <article className="songDetails">
@@ -46,7 +48,7 @@ export default function SongDetails() {
         (<span>🌟</span>) : 
         (<span>&nbsp; &nbsp; &nbsp;</span>)}
       <h1 className="Title">Song - {song.name} </h1>
-      <h1><span className="artist">Aritst - {song.artist}</span></h1>
+      <h1><span className="artist">Artist - {song.artist}</span></h1>
       <h2 className="Album"> 
         <span>
           Album - {song.album}
@@ -77,6 +79,7 @@ export default function SongDetails() {
 
       </div>  
     </article>
+      
     </div>
   
   )

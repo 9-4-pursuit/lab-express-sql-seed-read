@@ -20,10 +20,10 @@ useEffect(() => {
             <Link to="/songs/new" className="Links">New Song</Link>
         </button>
       <section>
-        {/* <h1>Songs</h1> */}
+        <h1 className="Playlist">PlayList</h1>
         <table>
           <thead>
-            <h1 className="Playlist">Playlist</h1>
+          
             <tr>
               <th>Fav</th>
               <th>Song</th>
@@ -32,7 +32,7 @@ useEffect(() => {
               <th>Time</th>
             </tr>
           </thead>
-          <br></br>
+          
           <tbody>
             {songs.map((song) => {
               return <Song key={song.id} song={song} /> 

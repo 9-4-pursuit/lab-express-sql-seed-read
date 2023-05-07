@@ -99,7 +99,7 @@ export default function EditSongForm() {
         type="checkbox"
         checked={song.is_favorite}
         onChange={handleCheckboxChange}
-        required
+        
         />
         <br></br>
 
