@@ -42,8 +42,8 @@ export default function SongDetails() {
         <h2>{songs.name}</h2>
         <p>{songs.artist}</p>
         <p>{songs.album}</p>
-        <p>{songs.is_favorite ? <span>⭐️</span> : null} {songs.name}</p>
         <p>{songs.time}</p>
+        <p>{songs.is_favorite ? <span>⭐️</span> : null} {songs.name}</p>
     
       <div className="showNavigation">
         <div>
