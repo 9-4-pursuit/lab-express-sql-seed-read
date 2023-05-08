@@ -1,17 +1,10 @@
-//What we are writing is Middleware -- its going to check to make the request from JS to check the origin request
-//This is Custom --> and is a separation of concerns
-
 const checkRequest = (req, res, next) => {
-  if (
-    req.body &&
-    req.body.name &&
-    req.body.artist &&
-    (req.body.is_favorite === "true" || "false")
-  ) {
+  const { title, artist, is_favorite } = req.body;
+  if (title && artist && (is_favorite === true || is_favorite === false)) {
     return next();
   } else {
     res.status(400).json({
-      error: "Body is missing information or body is not present at all",
+      error: "Title, artist, and is_favorite fields are required.",
     });
   }
 };
@@ -21,26 +14,12 @@ const checkId = (req, res, next) => {
     return next();
   } else {
     res.status(400).json({
-      error: "Body is missing information or body is not present at all",
+      error: "ID is missing.",
     });
-  }
-};
-
-const validateURL = (req, res, next) => {
-  if (
-    req.body.url.substring(0, 7) === "http://" ||
-    req.body.url.substring(0, 8) === "https://"
-  ) {
-    return next();
-  } else {
-    res
-      .status(400)
-      .json({ error: `You forgot to start your url with http:// or https://` });
   }
 };
 
 module.exports = {
   checkRequest,
   checkId,
-  validateURL,
 };

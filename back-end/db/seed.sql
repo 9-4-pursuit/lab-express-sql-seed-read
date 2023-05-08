@@ -1,6 +1,6 @@
 \c songs_dev;
 
-INSERT INTO songs (name, artist, album, time, category, is_favorite) 
+INSERT INTO songs (title, artist, album, time, genre, is_favorite) 
 VALUES 
   ('Bella Ciao(feat. Kabza De Small, DJ Maphorisa)', 'Tyler ICU', 'Bella Ciao (feat. Kabza De Small, DJ Maphorisa) - Single', '5:49', 'Amapiano', true),
   ('Vula Vala (feat. Nokwazi, Vigro Deep)', 'DJ Maphorisa', 'Scorpion Kings Live at Sun Arena 11 April', '6:14', 'Amapiano', true),

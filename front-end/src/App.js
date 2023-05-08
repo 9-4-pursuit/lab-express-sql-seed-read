@@ -1,7 +1,8 @@
 function App() {
   return (
     <div className="">
-      <h1>Tuner App</h1>
+      <h1>Tuner App by Cephus
+      </h1>
     </div>
   );
 }
