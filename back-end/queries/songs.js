@@ -71,9 +71,9 @@ const editSong = async (id, songToEdit) => {
 //create query
 const createSong = async (songToAdd) => {
   const { name, artist, album, time, is_favorite } = songToAdd;
-
   try {
-    const newSong = await db.one("INSERT INTO songs (name, artist, album, time, is_favorite) VALUES ($1, $2, $3, $4, $5) RETURNING *;", [name, artist, album, time, is_favorite]);
+    const getAlbumId = await db.one("SELECT id FROM albums WHERE name=$1;", [album]);
+    const newSong = await db.one("INSERT INTO songs (albums_id, name, artist, album, time, is_favorite) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;", [getAlbumId.id, name, artist, album, time, is_favorite]);
     return newSong;
   } catch (error) {
     return error;

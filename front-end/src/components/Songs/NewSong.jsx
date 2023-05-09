@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
 
 function NewSong() {
@@ -16,7 +16,7 @@ function NewSong() {
   async function addSong() {
     await axios
       .post(`${API}/songs`, newSong)
-      .then(() => navigate("/songs"))
+      .then(() => navigate(-1))
       .catch((error) => console.warn("Error: POST", error))
   }
 
@@ -35,6 +35,7 @@ function NewSong() {
 
   return (
     <div>
+      <h1>MUST CREATE ALBUM FRIST before adding a new song.</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Song Name: </label>
@@ -83,16 +84,15 @@ function NewSong() {
             onChange={handleCheckboxChange}
           />
         </div>
-
         <div>
-          <button>
-            <Link to={`/songs`}>Back</Link>
-          </button>
           <button type="submit">
             Submit
           </button>
         </div>
       </form>
+      <button onClick={() => navigate(-1)}>
+        Back
+      </button>
     </div>
   );
 }

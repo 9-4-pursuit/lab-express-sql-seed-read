@@ -4,14 +4,12 @@ import NavBar from "./components/NavBar.jsx";
 import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home.jsx";
 import Error from "./pages/Error.jsx";
-// import Index from "./pages/Index.jsx";
-// import New from "./pages/New.jsx";
-// import Show from "./pages/Show.jsx";
-// import Edit from "./pages/Edit.jsx";
+
 import Songs from "./components/Songs/Songs.jsx";
 import NewSong from "./components/Songs/NewSong.jsx";
 import SongDetails from "./components/Songs/SongDetails.jsx";
 import EditSong from "./components/Songs/EditSong.jsx";
+
 import Albums from "./components/Albums/Albums.jsx";
 import NewAlbum from "./components/Albums/NewAlbum.jsx";
 import AlbumDetails from "./components/Albums/AlbumDetails.jsx";

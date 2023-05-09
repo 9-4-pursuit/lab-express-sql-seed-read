@@ -38,7 +38,7 @@ function SongDetails() {
         }
         {name} - By {artist}
       </p>
-      <p><Link to={`/albums/${albums_id}`}>{album}</Link></p>
+      <p><Link to={`/albums/${albums_id}`}>Album: {album}</Link></p>
       <p>Time: {time}</p>
 
       <button><Link to="/songs">Back</Link></button>
