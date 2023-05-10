@@ -35,14 +35,15 @@ describe("Songs", () => {
   beforeEach(async () => {
     await db.none("DELETE FROM songs WHERE true");
     await db.none("ALTER SEQUENCE songs_id_seq RESTART");
-    await db.none(`INSERT INTO songs (name, artist, album, time, is_favorite) VALUES
-    ('Fame', 'David Bowie', 'Young Americans', '4:12', true ),
-    ('Once in a Lifetime', 'Talking Heads', 'Remain in Light', '4:19', true ),
-    ('The Great Curve', 'Talking Heads', 'Sand in the Vaseline', '5:39', true ),
-    ('(Nothing But) Flowers',  'Talking Heads', 'Remain in Light', '6:28', false ),
-    ('Books about UFOs', 'Hüsker Dü', 'New Day Rising', '2:49', true ),
-    ('Mr. Startup', 'Wolf Parade', 'Thin Mind', '3:31', true ),
-    ('We Got the World', 'Icona Pop', 'This is...', '3:17', false );`);
+    await db.none(`INSERT INTO songs (name, artist, album, time, category, is_favorite) 
+    VALUES 
+      ('Bella Ciao(feat. Kabza De Small, DJ Maphorisa)', 'Tyler ICU', 'Bella Ciao (feat. Kabza De Small, DJ Maphorisa) - Single', '5:49', 'Amapiano', true),
+      ('Vula Vala (feat. Nokwazi, Vigro Deep)', 'DJ Maphorisa', 'Scorpion Kings Live at Sun Arena 11 April', '6:14', 'Amapiano', true),
+      ('Ke Star (feat. Vigro Deep)', 'Focalistic', 'Sghubu Ses Excellent', '7:06', 'Amapiano', true),
+      ('Sponono (feat. WizKid, Burna Boy, Cassper Nyovest)', 'Kabza De Small', 'I Am the King of Amapiano: Sweet & Dust', '6:20', 'Amapiano', false),
+      ('Umsebenzi Wethu (feat. Mr Jazziq, Lady Du, Zuma, Reece Madlisa)', 'Busta 929 & Mpura', 'Umsebenzi Wethu - Single', '6:16', 'Amapiano', true),
+      ('Dinaledi (feat. Miano, Semi Tee, Kamu Dee)', 'Major League DJz', 'Pianochella!', '5:10', 'Amapiano', false),
+      ('Balloon', 'Uncle Waffles', 'Amapiano Groove', '6:43', 'Amapiano', true);`);
   });
 
   afterAll(() => {
@@ -55,59 +56,66 @@ describe("Songs", () => {
         const expected = [
           {
             id: 1,
-            name: "Fame",
-            artist: "David Bowie",
-            album: "Young Americans",
-            time: "4:12",
+            name: "Bella Ciao(feat. Kabza De Small, DJ Maphorisa)",
+            artist: "Tyler ICU",
+            album: "Bella Ciao (feat. Kabza De Small, DJ Maphorisa) - Single",
+            time: "5:49",
+            category: "Amapiano",
             is_favorite: true,
           },
           {
             id: 2,
-            name: "Once in a Lifetime",
-            artist: "Talking Heads",
-            album: "Remain in Light",
-            time: "4:19",
+            name: "Vula Vala (feat. Nokwazi, Vigro Deep)",
+            artist: "DJ Maphorisa",
+            album: "Scorpion Kings Live at Sun Arena 11 April",
+            time: "6:14",
+            category: "Amapiano",
             is_favorite: true,
           },
           {
             id: 3,
-            name: "The Great Curve",
-            artist: "Talking Heads",
-            album: "Sand in the Vaseline",
-            time: "5:39",
+            name: "Ke Star (feat. Vigro Deep)",
+            artist: "Focalistic",
+            album: "Sghubu Ses Excellent",
+            time: "7:06",
+            category: "Amapiano",
             is_favorite: true,
           },
           {
             id: 4,
-            name: "(Nothing But) Flowers",
-            artist: "Talking Heads",
-            album: "Remain in Light",
-            time: "6:28",
+            name: "Sponono (feat. WizKid, Burna Boy, Cassper Nyovest)",
+            artist: "Kabza De Small",
+            album: "I Am the King of Amapiano: Sweet & Dust",
+            time: "6:20",
+            category: "Amapiano",
             is_favorite: false,
           },
           {
             id: 5,
-            name: "Books about UFOs",
-            artist: "Hüsker Dü",
-            album: "New Day Rising",
-            time: "2:49",
+            name: "Umsebenzi Wethu (feat. Mr Jazziq, Lady Du, Zuma, Reece Madlisa)",
+            artist: "Busta 929 & Mpura",
+            album: "Umsebenzi Wethu - Single",
+            time: "6:16",
+            category: "Amapiano",
             is_favorite: true,
           },
           {
             id: 6,
-            name: "Mr. Startup",
-            artist: "Wolf Parade",
-            album: "Thin Mind",
-            time: "3:31",
-            is_favorite: true,
+            name: "Dinaledi (feat. Miano, Semi Tee, Kamu Dee)",
+            artist: "Major League DJz",
+            album: "Pianochella!",
+            time: "5:10",
+            category: "Amapiano",
+            is_favorite: false,
           },
           {
             id: 7,
-            name: "We Got the World",
-            artist: "Icona Pop",
-            album: "This is...",
-            time: "3:17",
-            is_favorite: false,
+            name: "Balloon",
+            artist: "Uncle Waffles",
+            album: "Amapiano Groove",
+            time: "6:43",
+            category: "Amapiano",
+            is_favorite: true,
           },
         ];
 
@@ -180,10 +188,11 @@ describe("Songs", () => {
       it("with correct id - fetches the correct song with the correct key/properties", async () => {
         const response = await request(songs).get("/songs/1");
         const parsedRes = JSON.parse(response.text);
-        expect(parsedRes.name).toEqual("Fame");
-        expect(parsedRes.artist).toEqual("David Bowie");
-        expect(parsedRes.album).toEqual("Young Americans");
-        expect(parsedRes.time).toEqual("4:12");
+        expect(parsedRes.name).toEqual("Bella Ciao(feat. Kabza De Small, DJ Maphorisa)");
+        expect(parsedRes.artist).toEqual("Tyler ICU");
+        expect(parsedRes.album).toEqual("Bella Ciao (feat. Kabza De Small, DJ Maphorisa) - Single");
+        expect(parsedRes.time).toEqual("5:49");
+        expect(parsedRes.category).toEqual("Amapiano");
         expect(parsedRes.is_favorite).toEqual(true);
       });
 
@@ -254,7 +263,7 @@ describe("Songs", () => {
       it("with valid id - deletes the correct song", async () => {
         const response = await request(songs).delete("/songs/1").send();
         const parsedRes = JSON.parse(response.text);
-        expect(parsedRes.name).toEqual("Fame");
+        expect(parsedRes.name).toEqual("Bella Ciao(feat. Kabza De Small, DJ Maphorisa)");
       });
       it("with invalid id - does not delete anything", async () => {
         const response = await request(songs).delete("/songs/99999").send();
