@@ -7,11 +7,12 @@ const API = process.env.REACT_APP_API_URL;
 function SongEditForm() {
   let { id } = useParams();
   let navigate = useNavigate();
-//!EDIT THE BAWDDYYYYYYYYYYYYYYYYYYYY
+
   const [song, setSong] = useState({
-    name: "",
-    url: "",
-    category: "",
+    title: "",
+    artist: "",
+    album: "",
+    genre: "",
     is_favorite: false,
   });
 
@@ -46,35 +47,41 @@ function SongEditForm() {
     event.preventDefault();
     updateSong(song, id);
   };
+  
   return (
     <div className="Edit">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="title">Title:</label>
         <input
-          id="name"
-          value={song.name}
+          id="title"
+          value={song.title}
           type="text"
           onChange={handleTextChange}
-          placeholder="Name of Website"
+          placeholder="Title of song"
           required
         />
-        <label htmlFor="url">URL:</label>
+        <label htmlFor="artist">Artist:</label>
         <input
-          id="url"
+          id="artist"
           type="text"
-          pattern="http[s]*://.+"
-          required
-          value={song.url}
-          placeholder="http://"
+          value={song.artist}
+          placeholder="Name of artist"
           onChange={handleTextChange}
         />
-        <label htmlFor="category">Category:</label>
+        <label htmlFor="album">Album:</label>
         <input
-          id="category"
+          id="album"
           type="text"
-          name="category"
-          value={song.category}
-          placeholder="educational, inspirational, ..."
+          value={song.album}
+          placeholder="Name of album"
+          onChange={handleTextChange}
+        />
+        <label htmlFor="genre">Genre:</label>
+        <input
+          id="genre"
+          type="text"
+          value={song.genre}
+          placeholder="Pop, Rock, Jazz, ..."
           onChange={handleTextChange}
         />
         <label htmlFor="is_favorite">Favorite:</label>

@@ -5,25 +5,31 @@ import { useNavigate } from "react-router-dom";
 const API = process.env.REACT_APP_API_URL;
 
 function SongNewForm() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const addSong = (newSong) => {
-    axios
-      .post(`${API}/songs`, newSong)
-      .then(
-        () => {
-          navigate(`/songs`);
-        },
-        (error) => console.error(error)
-      )
-      .catch((c) => console.warn("catch", c));
+  const addSong = async (newSong) => {
+    try {
+      const response = await axios.post(`${API}/songs`, newSong);
+      if (response.data) {
+        console.log(response.data);
+        navigate(`/songs`);
+      } else {
+        throw new Error("Error adding song");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error adding song");
+    }
   };
+  
 
   const [song, setSong] = useState({
-    name: "",
-    url: "",
-    category: "",
-    is_favorite: false,
+    "title": "",
+    "artist": "",
+    "album": "",
+    "time": "",
+    "genre": "",
+    "is_favorite": false
   });
 
   const handleTextChange = (event) => {
@@ -36,37 +42,62 @@ function SongNewForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addSong(song);
+    addSong({
+      "title": song.title,
+      "artist": song.artist,
+      "album": song.album,
+      "time": song.time,
+      "genre": song.genre,
+      "is_favorite": song.is_favorite
+    });
   };
+
   return (
     <div className="New">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="title">Title:</label>
         <input
-          id="name"
-          value={song.name}
+          id="title"
+          value={song.title}
           type="text"
           onChange={handleTextChange}
-          placeholder="Name of Website"
+          placeholder="Song Title"
           required
         />
-        <label htmlFor="url">URL:</label>
+        <label htmlFor="artist">Artist:</label>
         <input
-          id="url"
+          id="artist"
           type="text"
-          pattern="http[s]*://.+"
           required
-          value={song.url}
-          placeholder="http://"
+          value={song.artist}
+          placeholder="Artist Name"
           onChange={handleTextChange}
         />
-        <label htmlFor="category">Category:</label>
+        <label htmlFor="album">Album:</label>
         <input
-          id="category"
+          id="album"
           type="text"
-          name="category"
-          value={song.category}
-          placeholder="educational, inspirational, ..."
+          name="album"
+          value={song.album}
+          placeholder="Album Name"
+          onChange={handleTextChange}
+        />
+        <label htmlFor="time">Time:</label>
+        <input
+          id="time"
+          type="text"
+          name="time"
+          value={song.time}
+          placeholder="Song Duration"
+          onChange={handleTextChange}
+        />
+        <label htmlFor="genre">Genre:</label>
+        <input
+          id="genre"
+          type="text"
+          name="genre"
+          value={song.genre}
+          placeholder="Song Genre"
           onChange={handleTextChange}
         />
         <label htmlFor="is_favorite">Favorite:</label>

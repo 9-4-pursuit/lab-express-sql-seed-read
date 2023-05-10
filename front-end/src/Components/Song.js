@@ -12,7 +12,7 @@ function Song({ song }) {
       </td>
       <td>
         <a href={song.url} target="_blank" rel="noreferrer">
-          {song.name}
+          {song.title}
         </a>
       </td>
       <td>
