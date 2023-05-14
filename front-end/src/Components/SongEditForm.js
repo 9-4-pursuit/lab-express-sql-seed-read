@@ -50,7 +50,7 @@ function SongEditForm() {
   return (
     <div className="Edit">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Song Name</label>
         <input
           id="name"
           value={song.name}
@@ -59,7 +59,7 @@ function SongEditForm() {
           placeholder="Name of Song"
           required
         />
-        <label htmlFor="artist">Artist:</label>
+        <label htmlFor="artist">Artist</label>
         <input
           id="artist"
           value={song.artist}
@@ -77,7 +77,7 @@ function SongEditForm() {
           placeholder="Name of Album"
           required
         />
-        <label htmlFor="time">Time:</label>
+        <label htmlFor="time">Time</label>
         <input
           id="time"
           type="text"
@@ -86,7 +86,7 @@ function SongEditForm() {
           placeholder="Length of Song"
           onChange={handleTextChange}
         />
-        <label htmlFor="is_favorite">Favorite:</label>
+        <label htmlFor="is_favorite">Favorite</label>
         <input
           id="is_favorite"
           type="checkbox"

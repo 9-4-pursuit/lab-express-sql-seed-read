@@ -39,6 +39,7 @@ function SongNewForm() {
     event.preventDefault();
     addSong(song);
   };
+
   return (
     <div className="New">
       <form onSubmit={handleSubmit}>
@@ -51,7 +52,7 @@ function SongNewForm() {
           placeholder="Name of Song"
           required
         />
-        <label htmlFor="artist">Artist:</label>
+        <label htmlFor="artist">Artist</label>
         <input
           id="artist"
           value={song.artist}
