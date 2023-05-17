@@ -18,9 +18,9 @@ describe("Index page", () => {
 
   it("Has the correct properties displayed", () => {
     cy.get(".Song td").contains("Fame");
-    cy.get(".Songs td").contains("David Bowie");
-    cy.get(".Songs td").contains("4:12");
-    cy.get(".Songs td").contains("⭐️");
+    cy.get(".Song td").contains("David Bowie");
+    cy.get(".Song td").contains("4:12");
+    cy.get(".Song td").contains("⭐️");
   });
 
   it("Can load index page and has navigation to New page", () => {

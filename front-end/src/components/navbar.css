@@ -1,0 +1,51 @@
+nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 18vh;
+  background-color: #999999;
+  color: #66c88f;
+  z-index: 0;
+}
+
+header {
+  padding-top: 20px;
+  text-align: center;
+}
+header p {
+  transform: rotateZ(-5deg) translateY(-20px);
+  color: white;
+}
+.home-btn{
+  border:none;
+  background:transparent;
+  position: absolute;
+  z-index:6;
+  left:0;
+}
+.home-btn img{
+  width:50px;
+  height:50px;
+}
+.wave-container {
+  z-index: 3;
+  transform: translateY(90px);
+  text-align: center;
+  overflow: hidden;
+}
+#title {
+  position: absolute;
+  z-index: 10;
+  margin: 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-right: auto;
+  color: #66c88f;
+  font-size: 7em;
+  font-weight: bolder;
+  padding: 0;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 3px 3px 0 #817d7d, -1px -1px 0 #817d7d, 1px -1px 0 #817d7d,
+    -1px 1px 0 #817d7d, 1px 1px 0 #817d7d;
+}

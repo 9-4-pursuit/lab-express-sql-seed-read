@@ -1,0 +1,19 @@
+form{
+    position:absolute;
+    z-index:10;
+    margin-top:40px;
+    border:solid #66c88f;
+    border-radius:15px;
+    background-color: rgba(50, 136, 86, 0.3);
+    width:80%;
+    left:10%;
+    padding:30px;
+    text-align: center;
+}
+#name{
+    width:80%;
+}
+.submit{
+    display: block;
+    margin-left: 80% ;
+}
