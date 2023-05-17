@@ -17,15 +17,23 @@ header p {
   transform: rotateZ(-5deg) translateY(-20px);
   color: white;
 }
+.home-btn{
+  border:none;
+  background:transparent;
+  position: absolute;
+  z-index:6;
+  left:0;
+}
+.home-btn img{
+  width:50px;
+  height:50px;
+}
 .wave-container {
   z-index: 3;
   transform: translateY(90px);
   text-align: center;
   overflow: hidden;
 }
-
-
-
 #title {
   position: absolute;
   z-index: 10;

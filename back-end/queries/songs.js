@@ -1,4 +1,4 @@
-const db = require('../db/dbConfig')
+const db = require('../db/dbConfig');
 const getAllSongs = async (queries, id) => {
   try {
     // let allSongs
@@ -13,21 +13,30 @@ const getAllSongs = async (queries, id) => {
     //     allSongs = await db.any('SELECT * FROM songs WHERE is_favorite=false')
     //   }
     // } else {
-     const allSongs = await db.any('SELECT * FROM songs WHERE playlist_id=$1', id)
+    if (id) {
+      const allSongs = await db.any(
+        'SELECT * FROM songs WHERE playlist_id=$1',
+        id
+      );
+      return allSongs;
+    } else {
+      const allSongs = await db.any('SELECT * FROM songs');
+      return allSongs;
+    }
     // }
-    return allSongs
   } catch (error) {
-    return error
+    return error;
   }
-}
+};
 const getASong = async id => {
   try {
-    const oneSong = await db.one('SELECT * FROM songs WHERE id=$1', id)
-    return oneSong
+      const oneSong = await db.one('SELECT * FROM songs WHERE id=$1', +id);
+      console.log(oneSong)
+      return oneSong;
   } catch (error) {
-    return error
+    return error;
   }
-}
+};
 const addASong = async addedSong => {
   try {
     const newSong = await db.one(
@@ -39,34 +48,34 @@ const addASong = async addedSong => {
         addedSong.time,
         addedSong.is_favorite,
       ]
-    )
-    return newSong
+    );
+    return newSong;
   } catch (error) {
-    return error
+    return error;
   }
-}
+};
 const deleteSong = async id => {
   try {
     const deletedSong = await db.one(
       'DELETE FROM songs WHERE id=$1 RETURNING *',
       id
-    )
-    return deletedSong
+    );
+    return deletedSong;
   } catch (error) {
-    return error
+    return error;
   }
-}
+};
 const updateSong = async (id, song) => {
   try {
     const updatedSong = db.one(
       'UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5 WHERE id=$6 RETURNING *',
       [song.name, song.artist, song.album, song.time, song.is_favorite, id]
-    )
-    return updatedSong
+    );
+    return updatedSong;
   } catch (error) {
-    return error
+    return error;
   }
-}
+};
 
 module.exports = {
   getAllSongs,
@@ -74,4 +83,4 @@ module.exports = {
   addASong,
   deleteSong,
   updateSong,
-}
+};

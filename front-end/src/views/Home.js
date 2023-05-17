@@ -33,14 +33,29 @@ export default function Home({
             {playlist.name}
           </button>
         ))}
-        <aside className='add-playlist'>
-          <button onClick={()=>navigate('/playlist/new')}>Add Playlist</button>
+        <aside className='add-item'>
+          <button
+            className='add-playlist'
+            onClick={() => navigate('/playlist/new')}
+          >
+            ＋
+          </button>
         </aside>
       </section>
       <section className='songs-section'>
         <h2>{currentPlaylist ? currentPlaylist.name : 'Songs'}</h2>
-        {songs.length > 0 &&
-          songs.map(song => <Song key={`song-${song.id}`} song={song} />)}
+        <ul>
+          {songs.length > 0 &&
+            songs.map(song => <Song key={`song-${song.id}`} song={song} />)}
+        </ul>
+        <div className='add-item'>
+          <button
+            className='add-song'
+            onClick={() => navigate('/playlist/new')}
+          >
+            ＋
+          </button>
+        </div>
       </section>
     </div>
   )

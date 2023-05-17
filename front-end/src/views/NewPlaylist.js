@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './playlist-form.css'
-export default function NewPlaylist() {
+export default function NewPlaylist({handleSubmit}) {
   const [playlist, setPlaylist] = useState({
     name: '',
     is_favorite: false,
@@ -17,14 +17,12 @@ export default function NewPlaylist() {
       is_favorite: !playlist.is_favorite,
     })
   }
-const submit=()=>{
-    
-}
+
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={(e)=>handleSubmit(e,playlist)}>
       <label htmlFor='name'>Playlist Name:</label>
       <br />
-      <input type='text' name='name' id='name' onChange={handleTextChange} />
+      <input type='text' name='name' id='name' onChange={handleTextChange}/>
       <br />
       <label htmlFor='is_favorite'>Favorite Playlist</label>
       <input

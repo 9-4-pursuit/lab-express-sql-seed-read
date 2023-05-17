@@ -20,6 +20,15 @@ CREATE TABLE songs (
     artist TEXT NOT NULL,
     album TEXT,
     time TEXT,
+    is_favorite BOOLEAN
+);
+
+CREATE TABLE playlist_songs (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    artist TEXT NOT NULL,
+    album TEXT,
+    time TEXT,
     is_favorite BOOLEAN,
     playlist_id INTEGER REFERENCES playlist(id) ON DELETE CASCADE
 );

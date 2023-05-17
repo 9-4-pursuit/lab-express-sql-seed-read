@@ -9,13 +9,16 @@ console.log(song.name, overflow)
   return (
     <li key={`song${song.id}`}>
       <aside ref={ref}>
-        <p className='song-details'>
+        <p className={overflow?'song-details overflow':'song-details'}>
           {song.name}
           {song.album ? ` - ${song.album}` : null}
         </p>
-        <p className='sub-p'>Time: {song.time}</p>
+        <div className='sub-p'>
+            <p>{song.artist}</p>
+            <p>Time: {song.time}</p>
+            </div>
       </aside>
-      <button>✏️</button>
+      <button className='edit-btn'>✏️</button>
     </li>
   )
 }

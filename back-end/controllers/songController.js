@@ -16,17 +16,26 @@ const {
 
 
 songs.get('/', async (req, res) => {
+if(req.params.playlist_id){
   const allSongs = await getAllSongs(req.query, req.params.playlist_id)
-  console.log(allSongs)
   if (allSongs) {
     res.status(200).json(allSongs)
   } else {
     res.status(500).json({ error: 'Server Error:  Songs not found at songController.js' })
   }
+}else{
+  const allSongs = await getAllSongs(req.query)
+  if (allSongs) {
+    res.status(200).json(allSongs)
+  } else {
+    res.status(500).json({ error: 'Server Error:  Songs not found at songController.js' })
+  }
+}
 })
 songs.get('/:id', checkId, async (req, res) => {
   const { id } = req.params
   const song = await getASong(id)
+  console.log(song)
   if (song.artist) {
     res.status(200).json(song)
   } else {
@@ -36,7 +45,6 @@ songs.get('/:id', checkId, async (req, res) => {
 
 songs.post('/', checkRequest, async (req, res) => {
   const addedSong = await addASong(req.body)
-  // console.log(addedSong)
   if(addedSong.artist) {
     res.status(200).json(addedSong)
   }else{
