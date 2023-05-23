@@ -21,12 +21,37 @@ function SongEditForm() {
             (response) => setSong(response.data),
             (error) => navigate(`/not-found`)
         )
-    })
+    }, [id, navigate]);
 
+    const updateSong = (updatedSong) => {
+        axios
+          .put(`${API}/songs/${id}`, updatedSong)
+          .then(
+            () => {
+              navigate(`/songs/${id}`);
+            },
+            (error) => console.error(error)
+          )
+          .catch((c) => console.warn("catch", c));
+      };
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        updateSong(song, id)
+    };
+
+    const handleTextChange = (event) => {
+        setSong({...song, [event.target.id]: event.target.value})
+    };
+
+    const handleCheckboxChange = () => {
+        setSong({ ...song, is_favorite: !song.is_favorite });
+    };
 
     return (
         <div className="Edit">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Name:</label>
                 <input
                     id="name"
@@ -34,6 +59,7 @@ function SongEditForm() {
                     type="text"
                     placeholder="Name of Song"
                     required
+                    onChange={handleTextChange}
                 />
 
                 <label htmlFor="artist">Artist:</label>
@@ -43,6 +69,7 @@ function SongEditForm() {
                     type="text"
                     placeholder="Name of Artist"
                     required
+                    onChange={handleTextChange}
                 />
 
                 <label htmlFor="album">Album:</label>
@@ -52,6 +79,7 @@ function SongEditForm() {
                     type="text"
                     placeholder="Name of Album"
                     required
+                    onChange={handleTextChange}
                 />
 
                 <label htmlFor="time">Time:</label>
@@ -61,10 +89,22 @@ function SongEditForm() {
                     type="text"
                     placeholder="Duration"
                     required
+                    onChange={handleTextChange}
                 />
+
+                <label>Favorite:</label>
+                <input
+                    id="is_favorite"
+                    type="checkbox"
+                    checked={song.is_favorite}
+                    onChange={handleCheckboxChange}
+                />
+                
                  <br/>
                 <input type="submit"/>
             </form>
+
+            <Link to={`/songs/${id}`}><button>Go Back</button></Link>
         </div>
     )
 }

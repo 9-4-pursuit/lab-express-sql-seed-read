@@ -33,7 +33,7 @@ function Songs() {
                         </tr>
                     </thead>
                     <tbody>
-                        {songs && songs.map((song) => {
+                        {songs.map((song) => {
                             return <Song key={song.id} song={song} />
                         })}
                     </tbody>

@@ -25,7 +25,7 @@ function SongDetails() {
           (error) => console.error(error)
         )
         .catch((c) => console.warn("catch", c))
-      }
+    }
 
     const handleDelete = () => {
         deleteSong()
