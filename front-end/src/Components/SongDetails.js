@@ -24,7 +24,13 @@ export default function SongDetails() {
 
     return (
         <div className="Show">
-
+            <h1>Song Details</h1>
+            <h2>{song.is_favorite ? <span>⭐️</span> : <span>◎</span>}{song.name} by {song.artist}</h2>
+            <h3>{song.album}</h3>
+            <h4>Duration: {song.time}</h4>
+            <button><Link to={`/songs`}>Back</Link></button>
+            <button><Link to={`/songs/${song.id}/edit`}>Edit</Link></button>
+            <button onClick={handleDelete}>Delete</button>
         </div>
     )
 }
