@@ -1,7 +1,7 @@
 const express = require('express')
 const songs = express.Router();
 const { getAllSongs, getOneSong, createSong, deleteSong, updateSong } = require('../queries/songs')
-const { checkRequest } = require('../validations/checkSongs')
+const { checkRequest, checkId } = require('../validations/checkSongs')
 
 // Index route
 songs.get('/', async (req, res) => {
@@ -15,14 +15,14 @@ songs.get('/', async (req, res) => {
 })
 
 // Show route
-songs.get('/:id', async (req, res) => {
+songs.get('/:id', checkId, async (req, res) => {
     const { id } = req.params;
-    const song = await getOneSong(id);
 
-    if (song) {
-        res.status(202).json(song);
-    } else {
-        res.status(500).json({ error: 'Server Error' })
+    try {
+        const song = await getOneSong(id);
+        res.status(200).json(song);
+    } catch (error) {
+        res.status(400).json({ error: 'Server Error' })
     }
 })
 
@@ -39,7 +39,7 @@ songs.post('/', checkRequest, async (req, res) => {
 })
 
 // Delete route
-songs.delete('/:id', async (req, res) => {
+songs.delete('/:id', checkId, async (req, res) => {
     const { id } = req.params;
 
     try {

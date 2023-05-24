@@ -8,6 +8,15 @@ const checkRequest = (req, res, next) => {
     }
 }
 
+const checkId = (req, res, next) => {
+    if (req.params.id) {
+        next();
+    } else {
+        res.status(404).json({ error: "Invalid id."})
+    }
+}
+
 module.exports = {
-    checkRequest
+    checkRequest,
+    checkId
 }
