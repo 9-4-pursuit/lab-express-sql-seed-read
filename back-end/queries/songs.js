@@ -8,6 +8,7 @@ const getAllSongs = async () => {
     const allSongs = await db.any("SELECT * FROM songs");
     return allSongs;
   } catch (error) {
+    throw error;
   }
 };
 
@@ -30,7 +31,7 @@ const createASong = async ({ name, artist, album, time, is_favorite }) => {
     );
     return newSong;
   } catch (error) {
-    return error;
+    throw error;
   }
 };
 
