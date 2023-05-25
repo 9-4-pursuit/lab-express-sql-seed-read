@@ -1,6 +1,6 @@
 function Home() {
   return (
-    <div className="home">
+    <div className="home-container">
       <h1 className="logo">
         Tuner App
       </h1>
