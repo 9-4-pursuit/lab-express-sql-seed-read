@@ -1,130 +1,109 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+const API = process.env.REACT_APP_API_URL;
 
 function EditSong() {
-  const [newSong, setNewSong] = useState({
+  const [editSong, setEditSong] = useState({
     name: "",
     artist: "",
     album: "",
     time: "",
-    is_favorite: false,
+    is_favorite: false
   });
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  let navigate = useNavigate();
+  useEffect(() => {
+    async function getById() {
+      await axios
+        .get(`${API}/songs/${id}`)
+        .then((response) => setEditSong(response.data))
+        .catch((error) => console.error("Error: GET", error))
+    }
+    getById();
+  }, [id]);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/songs`, newSong)
-      .then(() => {
-        navigate("/songs");
+  async function updateTxn() {
+    await axios
+      .put(`${API}/songs/${id}`, editSong)
+      .then((response) => {
+        setEditSong(response.data);
+        navigate(`/songs`);
       })
-      .catch((error) => {
-        console.log(error);
-        navigate("/not-found");
-      });
+      .catch((error) => console.warn("Error: PUT", error))
   }
 
   function handleTextChange(event) {
-    setNewSong({ ...newSong, [event.target.id]: event.target.value });
-  }
+    setEditSong({ ...editSong, [event.target.id]: event.target.value });
+  };
 
   function handleCheckboxChange(event) {
-    setNewSong({ ...newSong, is_favorite: event.target.checked });
+    setEditSong({ ...editSong, [event.target.id]: event.target.checked });
+  };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    updateTxn();
   }
 
   return (
-    <div className="form-container">
+    <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">
-            Song Name :{" "}
-          </label>
+          <label htmlFor="name">Song Name: </label>
           <input
             id="name"
             type="text"
-            required
-            autoFocus
-            placeholder="Enter the name of song:"
-            title="Name of the Song is required"
+            value={editSong.name}
             onChange={handleTextChange}
-            value={newSong.name}
+            required
           />
-        </div>
-
+        </div >
         <div>
-          <label htmlFor="artist">
-            Artist Name :{" "}
-          </label>
+          <label htmlFor="artist">Artist: </label>
           <input
             id="artist"
             type="text"
-            required
-            placeholder="Enter the name of artist:"
-            title="Artist is required"
+            value={editSong.artist}
             onChange={handleTextChange}
-            value={newSong.artist}
+            required
           />
         </div>
-
         <div>
-          <label htmlFor="album">
-            Album Name :{" "}
-          </label>
+          <label htmlFor="album">Album: </label>
           <input
             id="album"
             type="text"
-            placeholder="Enter the name of album:"
+            value={editSong.album}
             onChange={handleTextChange}
-            value={newSong.album}
           />
         </div>
-
         <div>
-          <label htmlFor="time">
-            Time :{" "}
-          </label>
+          <label htmlFor="time">Time: </label>
           <input
             id="time"
             type="text"
-            placeholder="Enter the duration of the song:"
+            value={editSong.time}
             onChange={handleTextChange}
-            value={newSong.time}
+          />
+        </div>
+        <div>
+          <label htmlFor="is_favorite">Favorite: </label>
+          <input
+            id="is_favorite"
+            type="checkbox"
+            checked={editSong.is_favorite}
+            onChange={handleCheckboxChange}
           />
         </div>
 
         <div>
-          <label
-            htmlFor="is_favorite"
-          >
-            Favorite : {" "}
-            <input
-              id="is_favorite"
-              type="checkbox"
-              onChange={handleCheckboxChange}
-            />
-          </label>
-        </div>
-
-        <div>
-          <button
-            type="submit"
-            onSubmit={handleSubmit}
-          >
-            Save
+          <button>
+            <Link to={`/songs/${id}`}>Back</Link>
           </button>
-          <button
-            type="button"
-            onClick={() => navigate("/songs")}
-          >
-            Cancel
-          </button>
-          <button
-            type="reset"
-          >
-            {" "}
-            Reset
+          <button type="submit">
+            Submit
           </button>
         </div>
       </form>
