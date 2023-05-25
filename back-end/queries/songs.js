@@ -1,33 +1,31 @@
-const db = require("../db/dbConfig.js");
-
-//const { getAllSongs, getOneSong, createASong, updateSong, deleteSong } = require("../queries/songs")
+const db = require("../db/dbConfig");
 
 //INDEX
 const getAllSongs = async () => {
   try {
-    const allSongs = await db.any("SELECT * FROM songs");
+    const allSongs = await db.any("SELECT * FROM songs;");
     return allSongs;
   } catch (error) {
     throw error;
   }
 };
 
-//ONE
-const getOneSong = async (id) => {
+//ONE song
+const getASong = async (id) => {
   try {
     const oneSong = await db.oneOrNone("SELECT * FROM songs WHERE id=$1", id);
     return oneSong;
   } catch (error) {
-    return { error: error }
+    return { error: error };
   }
 };
 
-//CREATE
-const createASong = async ({ name, artist, album, time, is_favorite }) => {
+// CREATE/NEW
+const createSong = async (song) => {
   try {
     const newSong = await db.one(
-      "INSERT INTO songs (name, artist, album, time, is_favorite VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [name, artist, album, time, is_favorite]
+      "INSERT INTO songs (name, artist, album, time, is_favorite) VALUES($1, $2, $3, $4, $5) RETURNING *",
+      [song.name, song.artist, song.album, song.time, song.is_favorite]
     );
     return newSong;
   } catch (error) {
@@ -39,30 +37,33 @@ const createASong = async ({ name, artist, album, time, is_favorite }) => {
 const deleteSong = async (id) => {
   try {
     const deletedSong = await db.one(
-      "DELETE FROM songs WHERE id = $1 RETURNING *", id);
+      "DELETE FROM songs WHERE id = $1 RETURNING *",
+      id
+    );
     return deletedSong;
   } catch (error) {
     return error;
   }
 };
 
-//UPDATE
+//UPDATE/EDIT
 const updateSong = async (id, song) => {
   try {
-    const { name, artist, album, title, is_favorite } = song;
-    const updatedSong = await db.one("UPDATE songs SET name=$1, artist=$2, album=$3, time=$4, is_favorite=$5 WHERE id=$6 RETURNING *", [name, artist, album, time, is_favorite, id]);
+    const { name, artist, album, time, is_favorite } = song;
+    const updatedSong = await db.one(
+      "UPDATE songs SET name=$1, artist=$2, album=$3, time=$4,is_favorite=$5 WHERE id=$6 RETURNING *",
+      [name, artist, album, time, is_favorite, id]
+    );
     return updatedSong;
   } catch (error) {
     throw error;
   }
 };
 
-// const { getAllSongs, getOneSong, createASong, updateSong, deleteSong } = require("../queries/songs"
-// )
 module.exports = {
   getAllSongs,
-  getOneSong,
-  createASong,
+  getASong,
+  createSong,
+  deleteSong,
   updateSong,
-  deleteSong
 };

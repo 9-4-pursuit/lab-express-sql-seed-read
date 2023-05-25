@@ -29,5 +29,6 @@
     "postgres": "^3.3.4",
     "supertest": "^6.2.0"
   },
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {}
 }
